@@ -56,7 +56,7 @@ export default function Home() {
                   let r = Math.random()
                   let bubbleSize = `${BUBBLE_SIZE[Math.floor(r *3)]}px`
                   return (
-                    <div key={i} data-r={r} className="absolute left-0 top-0 transition-transform bg-black rounded-full" style={{top: `${r *100}%`, left: `calc(${i /BUBBLE_COUNT *100}% + ${BUBBLE_LEFT_OFFSET})`, width: bubbleSize, height: bubbleSize}}>
+                    <div key={i} data-r={r} suppressHydrationWarning={true} className="absolute left-0 top-0 transition-transform bg-black rounded-full" style={{top: `${r *100}%`, left: `calc(${i /BUBBLE_COUNT *100}% + ${BUBBLE_LEFT_OFFSET})`, width: bubbleSize, height: bubbleSize}}>
                     </div>
                   )
                 })
