@@ -1,12 +1,28 @@
 "use client"
 
-import demoImg from "@/public/works/asset_01.png"
 import { TopbarContext } from "./components/topbar/topbar";
 import { useContext, useEffect, useRef } from "react";
+
+import js_logo from "@/public/ext_logos/javascript.png"
+import ts_logo from "@/public/ext_logos/typescript.png"
+import lua_logo from "@/public/ext_logos/lua.png"
+import kotlin_logo from "@/public/ext_logos/kotlin.png"
+import cpp_logo from "@/public/ext_logos/cpp.svg"
+
+import demoImg from "@/public/works/asset_01.png"
+import { StaticImageData } from "next/image";
 
 const BUBBLE_SIZE = [24, 18, 12] // in pixels
 const BUBBLE_COUNT = 20
 const BUBBLE_LEFT_OFFSET = `${Math.random() *50}px`
+
+const SKILLS_DATA: Array<{image: StaticImageData, title: string, description: string}> = [
+  {
+    "image": js_logo,
+    "title": "Javascript",
+    "description": "Hello"
+  }
+]
 
 export default function Home() {
   const { topbarHt } = useContext(TopbarContext)
@@ -64,8 +80,19 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="p-8" style={{paddingTop: "50px", height: `calc(100svh - ${topbarHt}px)`}}>
+        <section className="p-8 z-10" style={{paddingTop: "50px", height: `calc(100svh - ${topbarHt}px)`}}>
           <h2 className="text-2xl font-bold">MY SKILLS AND EXPERTISE<span className="pl-2 font-normal text-base"> (in chronological order)</span></h2>
+          <div id="languages-container">
+            {
+              SKILLS_DATA.map(data => {
+                return (
+                  <div className="hover:bg-white hover:stroke saturate-0 hover:filter-none transition-colors min-w-0">
+                    <img src={data.image.src} style={{width: "auto", height: "214px", aspectRatio: 1}} />
+                  </div>
+                )
+              })
+            }
+          </div>
         </section>
     </main>
   );
