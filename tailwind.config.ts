@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   content: [
@@ -15,7 +16,13 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"),
+    plugin(function({ addVariant }) {
+      addVariant("hocus", ["&:hover", "&:focus"])
+      addVariant("hacus", ["&:hover", "&:focus", "&.active"])
+    })
+  ],
   daisyui: {
     themes: [
       {

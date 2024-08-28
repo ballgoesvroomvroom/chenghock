@@ -6,9 +6,48 @@ body {
   min-height: 100svh;
 }
 
-.text-stroke-black {
-  -webkit-text-stroke: 4px black;
-  paint-order: stroke fill;
+.text-stroke-black,
+.text-stroke-bg {
+  --text-stroke-width: 6px;
+  position: relative;
+
+  z-index: 0;
+}
+
+.text-stroke-bg {
+  --text-stroke-width: 4px;
+}
+
+.text-stroke-black:before {
+  content: attr(data-stroke);
+
+  position: absolute;
+  left: 0;
+
+  line-height: inherit;
+
+  -webkit-text-stroke: var(--text-stroke-width) #000;
+
+  z-index: -1;
+}
+
+.text-stroke-bg:before {
+  content: attr(data-stroke);
+
+  position: absolute;
+  left: 0;
+
+  line-height: inherit;
+
+  -webkit-text-stroke: var(--text-stroke-width) oklch(var(--p));
+
+  z-index: -1;
+}
+
+@layer screen(md) {
+  .text-stroke-bg {
+    --text-stroke-width: 8px;
+  }
 }
 
 @layer utilities {

@@ -18,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${robotoCondensed.className} bg-primary`}>
+    <html lang="en" className="bg-primary">
+      <body className={`${robotoCondensed.className}`}>
         <TopbarContextProviderWrapper>
           {children}
         </TopbarContextProviderWrapper>
