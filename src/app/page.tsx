@@ -1,7 +1,7 @@
 "use client"
 
 import { TopbarContext } from "@/app/components/topbar/topbar";
-import { useContext, useEffect, useRef, Fragment, useState } from "react";
+import { useContext, useEffect, useRef, Fragment, useState, useMemo } from "react";
 
 import { SKILLS_DATA } from "@/app/data/skills";
 
@@ -59,7 +59,7 @@ export default function Home() {
       console.log("clean")
       window.removeEventListener("scroll", windowScrollUpdate)
     }
-  }, [])
+  }, [bubbleWindowRef])
 
   const [skillSelectionIdx, setSkillSelectionIdx] = useState(0)
   const skillSelectionRef = useRef<Array<HTMLButtonElement|null>>([])
@@ -116,14 +116,14 @@ export default function Home() {
           <div className="hidden md:block absolute w-full left-0 -z-10" style={{top: `calc(100% - 200px)`, height: "400px"}}>
             <div ref={bubbleWindowRef} className="relative w-full h-full overflow-x-clip">
               {
-                Array.from({ length: BUBBLE_COUNT }).map((_, i) => {
+                useMemo(() => Array.from({ length: BUBBLE_COUNT }).map((_, i) => {
                   let r = Math.random()
                   let bubbleSize = `${BUBBLE_SIZE[Math.floor(r *3)]}px`
                   return (
                     <div key={i} data-r={r} suppressHydrationWarning={true} className="absolute left-0 top-0 transition-transform duration-[300ms] ease-out bg-black rounded-full" style={{top: `${r *100}%`, left: `calc(${i /BUBBLE_COUNT *100}% + ${BUBBLE_LEFT_OFFSET})`, width: bubbleSize, height: bubbleSize}}>
                     </div>
                   )
-                })
+                }), [])
               }
             </div>
           </div>
