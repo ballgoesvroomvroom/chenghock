@@ -1,13 +1,7 @@
 "use client"
 
-import { TopbarContext } from "./components/topbar/topbar";
+import { TopbarContext } from "@/app/components/topbar/topbar";
 import { useContext, useEffect, useRef, Fragment, useState } from "react";
-
-import { Kaushan_Script } from "next/font/google"
-const ks = Kaushan_Script({
-  subsets: ["latin"],
-  weight: "400"
-})
 
 import graphic_fish from "@/public/graphics/fish.svg"
 import graphic_prawn from "@/public/graphics/prawn_2.svg"
@@ -234,6 +228,11 @@ export default function Home() {
             <p>I'd be happy to accept any form of feedback or guidance you have to offer <span>me. :)</span></p>
             <p>I am readily contactable at hi@chenghock.com<br />Alternatively, I keep my Telegram open at t.me/chenghock</p>
             <p>Looking forward to our connection!</p>
+          </section>
+          <section className="max-w-1/2 mt-[200px]">
+            <h2 className="text-2xl font-bold pb-4">MY SOCIALS</h2>
+            <div className="grid gap-5">
+            </div>
           </section>
         </section>
     </main>
