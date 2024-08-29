@@ -1,11 +1,3 @@
-#topbar-window {
-	transition-duration: 100ms;
-	transition-property: border-bottom-color;
-	transition-timing-function: cubic-bezier(.4, 0, .2, 0);
-}
-
-#topbar-window.scrolled {
-	border-bottom-color: #000;
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
+#topbar-window.scrolled > nav > a.active > img {
+	display: block;
 }

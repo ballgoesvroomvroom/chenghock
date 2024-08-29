@@ -3,8 +3,7 @@
 import { TopbarContext } from "@/app/components/topbar/topbar";
 import { useContext, useEffect, useRef, Fragment, useState } from "react";
 
-import projectDataFromFile from "@/app/data/projects.json"
-const projectData: { [key: string]: { title: string, description: string }} = projectDataFromFile
+import { ProjectData } from "@/app/data/projects"
 
 import graphic_fish from "@/public/graphics/fish.svg"
 import graphic_prawn from "@/public/graphics/prawn_2.svg"
@@ -72,7 +71,7 @@ export default function DetailedProjectPage({ params }: { params: { slug: string
   const { topbarHt } = useContext(TopbarContext)
 
   // retrieve project details
-  const projectDetails = projectData[params.slug.toLowerCase()]
+  const projectDetails = ProjectData[params.slug.toLowerCase()]
   if (projectDetails == null) {
     // no match found
     return notFound()

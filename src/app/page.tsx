@@ -3,66 +3,18 @@
 import { TopbarContext } from "@/app/components/topbar/topbar";
 import { useContext, useEffect, useRef, Fragment, useState } from "react";
 
+import { SKILLS_DATA } from "@/app/data/skills";
+
 import graphic_fish from "@/public/graphics/fish.svg"
 import graphic_prawn from "@/public/graphics/prawn_2.svg"
-
-import js_logo from "@/public/ext_logos/javascript.png"
-import ts_logo from "@/public/ext_logos/typescript.png"
-import lua_logo from "@/public/ext_logos/lua.png"
-import kotlin_logo from "@/public/ext_logos/kotlin.png"
-import cpp_logo from "@/public/ext_logos/cpp.png"
-import python_logo from "@/public/ext_logos/python.png"
-import dax_logo from "@/public/ext_logos/dax.png"
 
 import arrow_pointer from "@/public/icons/thick_arrow.svg"
 
 import demoImg from "@/public/works/asset_01.png"
-import { StaticImageData } from "next/image";
 
 const BUBBLE_SIZE = [24, 18, 12] // in pixels
 const BUBBLE_COUNT = 20
-const BUBBLE_LEFT_OFFSET = `${Math.random() *50}px`
-
-const SKILLS_DATA: Array<{image: StaticImageData, title: string, description: string}> = [
-  {
-    "image": dax_logo,
-    "title": "Data Analysis Expressions",
-    "description": "Hello"
-  },
-  {
-    "image": js_logo,
-    "title": "Javascript",
-    "description": "Hello"
-  },
-  {
-    "image": ts_logo,
-    "title": "Typescript",
-    "description": "Hello"
-  },
-  {
-    "image": cpp_logo,
-    "title": "C++",
-    "description": "Hello"
-  },
-  {
-    "image": kotlin_logo,
-    "title": "Kotlin",
-    "description": "Hello"
-  },
-  {
-    "image": python_logo,
-    "title": "Python",
-    "description": "Hello"
-  },
-  {
-    "image": lua_logo,
-    "title": "Lua",
-    "description": "Hello\nByebye\nLOL"
-  }
-].map(e => {
-  e.description = e.description.split("\n").map(line => `<p>${line}</p>`).join("")
-  return e
-})
+const BUBBLE_LEFT_OFFSET = `${3 +Math.random() *50}px`
 
 export default function Home() {
   const { topbarHt } = useContext(TopbarContext)
@@ -70,7 +22,9 @@ export default function Home() {
   const bubbleWindowRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const windowScrollUpdate = () => {
+    let bubbleFloated = Math.min(window.scrollY /window.innerHeight, 1) >= .45 // local state, will not float if debounce is set to true
+    const windowScrollUpdate = (_: Event | null, force?: boolean) => {
+      // force: boolean, if true, will update determined by lerp threshold, ignoring bubbleFloated state
       if (!bubbleWindowRef.current) {
         return
       }
@@ -80,16 +34,31 @@ export default function Home() {
 
       let lerp = Math.min(scrollY /windowHt, 1) // [0, 1], should be at 1 when scroll through first page (height of 100svh)
       let bubbleWindowChildren = bubbleWindowRef.current.children as HTMLCollectionOf<HTMLElement>
-      for (let bubbleElement of bubbleWindowChildren) {
-        let r: number = parseFloat(bubbleElement.getAttribute("data-r") ?? "0")
-        bubbleElement.style.transform = `translateY(-${((r +.2) *2 *lerp) *100}px)`
+      if (lerp >= .45 && (force || bubbleFloated === false)) {
+        bubbleFloated = true
+        console.log("triggered")
+        for (let bubbleElement of bubbleWindowChildren) {
+          let r: number = parseFloat(bubbleElement.getAttribute("data-r") ?? "0")
+          bubbleElement.style.transform = `translateY(-${((r +.2) *2 *1) *100}px)`
+          bubbleElement.style.transitionDelay = `${Math.random() *200}ms`
+        }
+      } else if (lerp < .45 && (force || bubbleFloated === true)) {
+        bubbleFloated = false
+        console.log("close")
+        for (let bubbleElement of bubbleWindowChildren) {
+          let r: number = parseFloat(bubbleElement.getAttribute("data-r") ?? "0")
+          bubbleElement.style.transform = "unset"
+        }
       }
     }
 
     window.addEventListener("scroll", windowScrollUpdate)
-    windowScrollUpdate()
+    windowScrollUpdate(null, true)
 
-    return () => window.removeEventListener("scroll", windowScrollUpdate)
+    return () => {
+      console.log("clean")
+      window.removeEventListener("scroll", windowScrollUpdate)
+    }
   }, [])
 
   const [skillSelectionIdx, setSkillSelectionIdx] = useState(0)
@@ -151,7 +120,7 @@ export default function Home() {
                   let r = Math.random()
                   let bubbleSize = `${BUBBLE_SIZE[Math.floor(r *3)]}px`
                   return (
-                    <div key={i} data-r={r} suppressHydrationWarning={true} className="absolute left-0 top-0 transition-transform bg-black rounded-full" style={{top: `${r *100}%`, left: `calc(${i /BUBBLE_COUNT *100}% + ${BUBBLE_LEFT_OFFSET})`, width: bubbleSize, height: bubbleSize}}>
+                    <div key={i} data-r={r} suppressHydrationWarning={true} className="absolute left-0 top-0 transition-transform duration-[300ms] ease-out bg-black rounded-full" style={{top: `${r *100}%`, left: `calc(${i /BUBBLE_COUNT *100}% + ${BUBBLE_LEFT_OFFSET})`, width: bubbleSize, height: bubbleSize}}>
                     </div>
                   )
                 })

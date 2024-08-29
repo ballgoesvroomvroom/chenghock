@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation";
 import { Context, createContext, Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from "react";
 import "./topbar.css"
 
+import arrow_pointer from "@/public/icons/thick_arrow.svg"
+
 export const INITIAL_TOPBAR_HT = 56
 
 export const TopbarContext: Context<{topbarHt: number, setTopbarHt?: Dispatch<SetStateAction<number>>}> = createContext({ topbarHt: INITIAL_TOPBAR_HT })
@@ -59,12 +61,12 @@ function TopbarComponent() {
   }, [topbarScrolled])
 
   return (
-    <div ref={topbarRef} id="topbar-window" className={`flex justify-between items-center bg-primary sticky top-0 z-50 ${topbarScrolled === true ? "scrolled" : ""}`}>
+    <div ref={topbarRef} id="topbar-window" className={`flex justify-between items-center bg-primary sticky top-0 z-50 border-solid border-black [&.scrolled]:border-b ${topbarScrolled === true ? "scrolled" : ""} duration-100 ease-in-out`} style={{transitionProperty: "border-bottom-color"}}>
       <a href="/"><p className="p-4 px-8 font-bold">CHONG CHENG HOCK</p></a>
       <nav className="basis-1/2 max-w-80 flex justify-between">
-        <a href="/about" className={`${pathName === "/about" ? "active" : ""} p-4 hover:font-bold`}>About</a>
-        <a href="/works" className={`${pathName === "/works" ? "active" : ""} p-4 hover:font-bold`}>Works</a>
-        <a href="/contact" className={`${pathName === "/contact" ? "active" : ""} p-4 hover:font-bold`}>Contact</a>
+        <a href="/about" className={`relative ${pathName === "/about" ? "active" : ""} p-4 hacus:font-bold`}>About<img src={arrow_pointer.src} className="hidden absolute bottom-0 left-1/2 w-3 h-3 rotate-180 -translate-x-1/2" /></a>
+        <a href="/works" className={`relative ${pathName === "/works" ? "active" : ""} p-4 hacus:font-bold`}>Works<img src={arrow_pointer.src} className="hidden absolute bottom-0 left-1/2 w-3 h-3 rotate-180 -translate-x-1/2" /></a>
+        <a href="/contact" className={`relative ${pathName === "/contact" ? "active" : ""} p-4 hacus:font-bold`}>Contact<img src={arrow_pointer.src} className="hidden absolute bottom-0 left-1/2 w-3 h-3 rotate-180 -translate-x-1/2" /></a>
       </nav>
     </div>
   );
