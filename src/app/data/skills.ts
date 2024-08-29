@@ -42,7 +42,7 @@ export const SKILLS_DATA: Array<{image: StaticImageData, title: string, descript
   {
     "image": lua_logo,
     "title": "Lua",
-    "description": "Hello\nByebye\nLOL"
+    "description": "Hello"
   }
 ].map(e => {
   e.description = e.description.split("\n").map(line => `<p>${line}</p>`).join("")
