@@ -108,14 +108,14 @@ function MiddleColumn() {
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">Fun facts about me</h2>
 					<p className="pb-2">All IT things aside, I love to spend my money guilt-free on seafood, with my favourite go-to being crabs and fish dishes.</p>
-					<p className="pb-2 italic">&lt;insert-picture-of-chilli-pepper-crab-here&gt; 🌶️🌶️</p>
+					<p className="pb-2 italic">&lt;insert-picture-of-black-pepper-crab-here&gt; 🌶️🌶️</p>
 					<p>Otherwise, I </p>
 				</div>
 			</section>
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">Reach out to me</h2>
-					<p className="pb-2">I am easily reachable via email, <a href="mailto:hi@chenghock.com" className="link" target="_blank">hi@chenghock.com</a>.</p>
+					<p className="pb-2">I am easily reachable via email, <a href="mailto:hi@chenghock.com" className="link"	 target="_blank">hi@chenghock.com</a>.</p>
 					<p className="pb-2">Alternatively, you may reach out to me on any of my social media platforms.</p>
 					<SocialsContainer iconSize={32} />
 				</div>
