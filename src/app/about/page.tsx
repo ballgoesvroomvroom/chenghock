@@ -3,7 +3,7 @@
 import headshot from "@/public/graphics/headshot_square.jpg"
 import { SocialsContainer } from "@/app/components/socials"
 import { TopbarContext } from "@/app/components/topbar/topbar"
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 function LeftColumn() {
 	return (
@@ -41,7 +41,15 @@ function RightColumn() {
 }
 
 export default function AboutMePage() {
-	const { topbarHt } = useContext(TopbarContext)
+	const { topbarHt, setForceTopbarScrollState } = useContext(TopbarContext)
+
+	useEffect(() => {
+		if (!setForceTopbarScrollState) {
+			return
+		}
+
+		setForceTopbarScrollState(true) // force .scrolled state on topbar for this page
+	}, [setForceTopbarScrollState])
 
 	return (
 		// @ts-ignore
