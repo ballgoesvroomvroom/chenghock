@@ -46,15 +46,15 @@ export default function Home() {
       <div className="p-10 flex flex-col gap-2 items-center justify-center">
         <h1 className="font-bold text-2xl">Works</h1>
         <div className="flex flex-row grow border-2 border-[#212121] border-solid">
-          <button ref={workSwitchWABtn} className={`hocus:bg-accent grow basis-1/2 p-2 px-4 font-bold [&.active]:bg-[#212121] [&.active]:text-white transition-colors ${workSwitchState === 0 ? "active" : ""} whitespace-nowrap`}>Web application</button>
-          <button ref={workSwitchDJBtn} className={`hocus:bg-accent grow basis-1/2 p-2 px-4 font-bold [&.active]:bg-[#212121] [&.active]:text-white transition-colors ${workSwitchState === 1 ? "active" : ""} whitespace-nowrap`}>Data journalism</button>
+          <button ref={workSwitchWABtn} className={`min-w-0 hocus:bg-accent grow basis-1/2 p-2 px-4 font-bold [&.active]:bg-[#212121] [&.active]:text-white transition-colors ${workSwitchState === 0 ? "active" : ""} whitespace-nowrap`}>Web application</button>
+          <button ref={workSwitchDJBtn} className={`min-w-0 hocus:bg-accent grow basis-1/2 p-2 px-4 font-bold [&.active]:bg-[#212121] [&.active]:text-white transition-colors ${workSwitchState === 1 ? "active" : ""} whitespace-nowrap`}>Data journalism</button>
         </div>
       </div>
       {
         ["WEB APPLICATION", "DATA JOURNALISM"].map((projectType, i) => {
           return (
             <div key={i} className={`flex-col items-stretch gap-4 [&.active]:flex hidden ${workSwitchState === i ? "active" : ""}`}>
-              <h2 className="font-bold text-lg">{projectType}</h2>
+              <h2 className="font-bold text-lg -mb-2">{projectType}</h2>
               {
                 ProjectDataOrder[i].map((projectId, j) => {
                   return (
