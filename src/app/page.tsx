@@ -11,6 +11,7 @@ import graphic_prawn from "@/public/graphics/prawn_2.svg"
 import arrow_pointer from "@/public/icons/thick_arrow.svg"
 
 import demoImg from "@/public/works/asset_01.png"
+import { SocialsContainer } from "@/app/components/socials";
 
 const BUBBLE_SIZE = [24, 18, 12] // in pixels
 const BUBBLE_COUNT = 20
@@ -195,13 +196,12 @@ export default function Home() {
           <section className="[&>p]:pb-2 max-w-[50%]">
             <h2 className="text-2xl font-bold pb-4">REACH OUT TO ME</h2>
             <p>I'd be happy to accept any form of feedback or guidance you have to offer <span>me. :)</span></p>
-            <p>I am readily contactable at hi@chenghock.com<br />Alternatively, I keep my Telegram open at t.me/chenghock</p>
+            <p>I am readily contactable at <a href="mailto:hi@chenghock.com" target="_blank">hi@chenghock.com</a>.<br />Alternatively, I keep my Telegram open at <a href="https://t.me/chenghock" target="_blank">t.me/chenghock</a>.</p>
             <p>Looking forward to our connection!</p>
           </section>
           <section className="max-w-1/2 mt-[200px]">
             <h2 className="text-2xl font-bold pb-4">MY SOCIALS</h2>
-            <div className="grid gap-5">
-            </div>
+            <SocialsContainer iconSize={84} />
           </section>
         </section>
     </main>

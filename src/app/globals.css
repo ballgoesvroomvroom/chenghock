@@ -44,6 +44,14 @@ body {
   z-index: -1;
 }
 
+@keyframes lr {
+  from {
+    transform: translateX(0);
+  } to {
+    transform: translateX(-100%);
+  }
+}
+
 @layer screen(md) {
   .text-stroke-bg {
     --text-stroke-width: 8px;
@@ -53,5 +61,18 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+  }
+
+  .scroll-lr {
+    transform-box: fill-box;
+    animation: lr 20s linear infinite;
   }
 }
