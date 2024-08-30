@@ -10,11 +10,23 @@ export function SocialsContainer({ iconSize }: { iconSize?: number }) {
 	}
 
 	return (
-		<div className="flex flex-row gap-4">
-			<a href="https://www.linkedin.com/in/chong-cheng-hock-232b75282" className="p-px" target="_blank"><img src={logo_linkedin.src} alt="LinkedIn" style={{width: `${iconSize}px`, height: `${iconSize}px`}} /></a>
-			<a href="https://github.com/ballgoesvroomvroom" className="p-px" target="_blank"><img src={logo_github.src} alt="GitHub" style={{width: `${iconSize}px`, height: `${iconSize}px`}} /></a>
-			<a href="https://t.me/cheng_hock" className="p-px" target="_blank"><img src={logo_telegram.src} alt="Telegram" style={{width: `${iconSize}px`, height: `${iconSize}px`}} /></a>
-			<a href="mailto:hi@chenghock.com" className="p-px" target="_blank"><img src={logo_email.src} alt="Email" style={{width: `${iconSize}px`, height: `${iconSize}px`}} /></a>
+		<div className="socials-container flex flex-row gap-4">
+			<a href="https://www.linkedin.com/in/chong-cheng-hock-232b75282" className="relative p-px" target="_blank">
+				<img src={logo_linkedin.src} alt="LinkedIn" style={{width: `${iconSize}px`, height: `${iconSize}px`}} />
+				<div className="focus-under absolute -bottom-2 h-1 w-full bg-black-accent"></div>
+			</a>
+			<a href="https://github.com/ballgoesvroomvroom" className="relative p-px" target="_blank">
+				<img src={logo_github.src} alt="GitHub" style={{width: `${iconSize}px`, height: `${iconSize}px`}} />
+				<div className="focus-under absolute -bottom-2 h-1 w-full bg-black-accent"></div>
+			</a>
+			<a href="https://t.me/cheng_hock" className="relative p-px" target="_blank">
+				<img src={logo_telegram.src} alt="Telegram" style={{width: `${iconSize}px`, height: `${iconSize}px`}} />
+				<div className="focus-under absolute -bottom-2 h-1 w-full bg-black-accent"></div>
+			</a>
+			<a href="mailto:hi@chenghock.com" className="relative p-px" target="_blank">
+				<img src={logo_email.src} alt="Email" style={{width: `${iconSize}px`, height: `${iconSize}px`}} />
+				<div className="focus-under absolute -bottom-2 h-1 w-full bg-black-accent"></div>
+			</a>
 		</div>
 	)
 }

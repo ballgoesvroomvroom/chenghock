@@ -115,7 +115,7 @@ function MiddleColumn() {
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">Reach out to me</h2>
-					<p className="pb-2">I am easily reachable via email, <a href="mailto:hi@chenghock.com" target="_blank">hi@chenghock.com</a>.</p>
+					<p className="pb-2">I am easily reachable via email, <a href="mailto:hi@chenghock.com" className="link" target="_blank">hi@chenghock.com</a>.</p>
 					<p className="pb-2">Alternatively, you may reach out to me on any of my social media platforms.</p>
 					<SocialsContainer iconSize={32} />
 				</div>

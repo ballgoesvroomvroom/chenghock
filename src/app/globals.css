@@ -50,6 +50,21 @@ a.link {
   z-index: -1;
 }
 
+.socials-container > a > div.focus-under,
+.socials-container > a > div.focus-under {
+  transform-origin: left;
+  transform: scaleX(0);
+
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 0);
+  transition-duration: 100ms;
+}
+
+.socials-container > a:focus > div.focus-under,
+.socials-container > a:hover > div.focus-under {
+  transform: scaleX(1);
+}
+
 @keyframes lr {
   from {
     transform: translateX(0);

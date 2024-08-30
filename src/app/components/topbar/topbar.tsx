@@ -63,7 +63,7 @@ function TopbarComponent() {
 
   return (
     <div ref={topbarRef} id="topbar-window" className={`flex justify-between items-stetch bg-primary sticky top-0 z-50 border-solid border-black [&.scrolled]:border-b-2 ${topbarScrolled === true || forceTopbarScrollState ? "scrolled" : ""} duration-100 ease-in-out`} style={{transitionProperty: "border-bottom-color"}}>
-      <a href="/"><p className="p-2 px-4 md:p-4 md:px-8 font-bold">CHONG CHENG HOCK</p></a>
+      <a href="/" className=""><p className="p-2 px-4 md:p-4 md:px-8 font-bold">CHONG CHENG HOCK</p></a>
       <nav className="basis-1/2 max-w-80 flex justify-between">
         <a href="/about" className={`relative ${pathName === "/about" ? "active" : ""} p-2 md:p-4 hacus:font-bold flex justify-center items-center`}><p>About</p><img src={arrow_pointer.src} className="hidden absolute bottom-0 left-1/2 w-3 h-3 rotate-180 -translate-x-1/2" /></a>
         <a href="/works" className={`relative ${pathName === "/works" ? "active" : ""} p-2 md:p-4 hacus:font-bold flex justify-center items-center`}><p>Works</p><img src={arrow_pointer.src} className="hidden absolute bottom-0 left-1/2 w-3 h-3 rotate-180 -translate-x-1/2" /></a>
