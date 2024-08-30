@@ -191,7 +191,7 @@ export default function Home() {
         <section className="flex flex-col justify-center items-center p-8 z-10" style={{paddingTop: "50px", height: `calc(100svh - ${topbarHt}px)`}}>
           <h2 className="text-2xl font-bold">MY WORKS</h2>
         </section>
-        <section className="flex flex-col p-8 z-10 bg-contain bg-no-repeat bg-right" style={{paddingTop: "100px", height: `calc(100svh - ${topbarHt}px)`, backgroundImage: `url(${graphic_prawn.src})`}}>
+        <section className="flex flex-col p-8 z-10 bg-contain bg-no-repeat bg-right-top" style={{paddingTop: "100px", height: `calc(100svh - ${topbarHt}px)`, backgroundImage: `url(${graphic_prawn.src})`}}>
           <section className="[&>p]:pb-2 max-w-[50%]">
             <h2 className="text-2xl font-bold pb-4">REACH OUT TO ME</h2>
             <p>I'd be happy to accept any form of feedback or guidance you have to offer <span>me. :)</span></p>

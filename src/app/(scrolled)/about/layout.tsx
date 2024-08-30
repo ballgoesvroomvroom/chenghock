@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto_Condensed } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 
 import { TopbarContextProviderWrapper } from "@/app/components/topbar/topbar";
 
@@ -17,9 +17,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-primary">
+    <html lang="en" className="bg-accent">
       <body className={`${robotoCondensed.className}`}>
-        <TopbarContextProviderWrapper>
+        <TopbarContextProviderWrapper forceScrollState={true}>
           {children}
         </TopbarContextProviderWrapper>
       </body>
