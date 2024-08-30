@@ -6,6 +6,12 @@ body {
   min-height: 100svh;
 }
 
+a.link {
+  color: oklch(var(--a));
+  text-decoration: underline;
+  text-decoration-color: oklch(var(--a));
+}
+
 .text-stroke-black,
 .text-stroke-bg {
   --text-stroke-width: 6px;

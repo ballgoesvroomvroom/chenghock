@@ -196,7 +196,7 @@ export default function Home() {
           <section className="[&>p]:pb-2 max-w-[50%]">
             <h2 className="text-2xl font-bold pb-4">REACH OUT TO ME</h2>
             <p>I'd be happy to accept any form of feedback or guidance you have to offer <span>me. :)</span></p>
-            <p>I am readily contactable at <a href="mailto:hi@chenghock.com" target="_blank">hi@chenghock.com</a>.<br />Alternatively, I keep my Telegram open at <a href="https://t.me/chenghock" target="_blank">t.me/chenghock</a>.</p>
+            <p>I am readily contactable at <a href="mailto:hi@chenghock.com" className="link" target="_blank">hi@chenghock.com</a>.<br />Alternatively, I keep my Telegram open at <a href="https://t.me/chenghock" className="link" target="_blank">t.me/chenghock</a>.</p>
             <p>Looking forward to our connection!</p>
           </section>
           <section className="max-w-1/2 mt-[200px]">
