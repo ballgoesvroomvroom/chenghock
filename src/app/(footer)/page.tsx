@@ -22,6 +22,7 @@ export default function Home() {
   const { topbarHt } = useContext(TopbarContext)
 
   const bubbleWindowRef = useRef<HTMLDivElement>(null)
+  const headshotImgRef = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
     let bubbleFloated = Math.min(window.scrollY /window.innerHeight, 1) >= .45 // local state, will not float if debounce is set to true
@@ -44,12 +45,21 @@ export default function Home() {
           bubbleElement.style.transform = `translateY(-${((r +.2) *2 *1) *100}px)`
           bubbleElement.style.transitionDelay = `${Math.random() *200}ms`
         }
+
+        if (headshotImgRef.current) {
+          console.log("ref added")
+          headshotImgRef.current.classList.add("active")
+        }
       } else if (lerp < .45 && (force || bubbleFloated === true)) {
         bubbleFloated = false
         console.log("close")
         for (let bubbleElement of bubbleWindowChildren) {
           let r: number = parseFloat(bubbleElement.getAttribute("data-r") ?? "0")
           bubbleElement.style.transform = "unset"
+        }
+
+        if (headshotImgRef.current) {
+          headshotImgRef.current.classList.remove("active")
         }
       }
     }
@@ -62,43 +72,6 @@ export default function Home() {
       window.removeEventListener("scroll", windowScrollUpdate)
     }
   }, [bubbleWindowRef])
-
-  const [skillSelectionIdx, setSkillSelectionIdx] = useState(0)
-  const skillSelectionRef = useRef<Array<HTMLButtonElement|null>>([])
-  const skillTitleRef = useRef<HTMLDivElement>(null)
-  const skillDescriptionRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (!skillSelectionRef.current || skillSelectionRef.current.length === 0) {
-      return
-    }
-
-    let cbMap = [] // store callback function to be removed on clean-up
-    for (let i = 0; i < skillSelectionRef.current.length; i++) {
-      let skillSelect = skillSelectionRef.current[i]
-      cbMap[i] = (e: Event) => {
-        setSkillSelectionIdx(i)
-      }
-
-      skillSelect?.addEventListener("click", cbMap[i])
-    }
-
-    return () => {
-      for (let i = 0; i < skillSelectionRef.current.length; i++) {
-        skillSelectionRef.current[i]?.removeEventListener("click", cbMap[i])
-      }
-    }
-  }, [skillSelectionRef])
-
-  useEffect(() => {
-    // re-render contents of description
-    if (!skillTitleRef.current || !skillDescriptionRef.current) {
-      return
-    }
-
-    skillTitleRef.current.innerHTML = SKILLS_DATA[skillSelectionIdx].title
-    skillDescriptionRef.current.innerHTML = SKILLS_DATA[skillSelectionIdx].description
-  }, [skillSelectionIdx])
 
   return (
     <main>
@@ -132,8 +105,8 @@ export default function Home() {
         </section>
         {/* 
         // @ts-ignore */}
-        <section className={`flex flex-row p-8 z-10 min-h-[var(--ht)] md:h-[var(--ht)] gap-8`} style={{"--ht": `calc(100svh - ${topbarHt}px)`, paddingTop: "50px"}}>
-          <div className="basis-1/2 min-w-0 grow">
+        <section className={`relative sm:flex sm:flex-row p-8 min-h-[var(--ht)] sm:h-[var(--ht)] gap-8`} style={{"--ht": `calc(100svh - ${topbarHt}px)`, paddingTop: "50px"}}>
+          <div className="z-10 sm::basis-1/2 sm:min-w-0 sm:grow">
             <h2 className="text-2xl font-bold pb-4">ABOUT ME</h2>
             <p className="pb-4">I am a  motivated individual, passionate about developing impactful web applications. The web application is the front face of every story, business, xx. Therefore, I strongly believe designing secure yet functional and accessible web applications is a must-have key skill.</p>
             <p className="pb-4">My latest venture has been interacting with ML models, with my most recent exposure to recommendation engines using cosine similarities.</p>
@@ -142,9 +115,9 @@ export default function Home() {
               <button className="p-2 rounded bg-black-accent text-white whitespace-nowrap">About me</button>
             </p>
           </div>
-          <div className="basis-1/2 grow ml-16 origin-top-left rotate-[10deg]">
+          <div className="absolute top-0 -z-10 opacity-20 sm:relative sm:opacity-100 sm:basis-1/2 sm:grow ml-16 origin-top-left rotate-[10deg]">
             <div id="pictureFrame" className="box-content max-w-[500px] p-2 pb-12 aspect-square bg-white drop-shadow-lg">
-              <img src={headshot_img.src} className="w-full h-full" alt="Picture of me" />
+              <img ref={headshotImgRef} src={headshot_img.src} className="w-full h-full saturate-0 opacity-0 [&.active]:saturate-100 [&.active]:opacity-100" alt="Picture of me" style={{transitionProperty: "filter, opacity", transitionTimingFunction: "linear", transitionDuration: "5s", transitionDelay: "300ms"}} />
             </div>
           </div>
         </section>
