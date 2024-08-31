@@ -11,7 +11,7 @@ import headshot from "@/public/graphics/headshot_square.jpg"
 
 function LeftColumn() {
 	return (
-		<div className="flex flex-col h-full basis-1/3 grow shrink-0 border-r-2 border-black border-solid">
+		<div className="flex flex-col md:h-full basis-1/3 grow md:shrink-0 md:border-r-2 md:border-black md:border-solid">
 			<div className="p-6">
 				<h1 className="font-bold text-5xl pb-4">I am a student</h1>
 				<p className="text-xl">Diploma in Applied AI & Analytics @ Nanyang Polytechnic</p>
@@ -64,7 +64,7 @@ function MiddleColumn() {
 	}, [hScrollContainerRef])
 
 	return (
-		<div className="h-full overflow-y-auto grow-0 shrink-0 min-w-0 basis-1/3 border-r-2 border-black border-solid no-scrollbar">
+		<div className="md:h-full md:overflow-y-auto grow-0 shrink-0 min-w-0 basis-1/3 md:border-r-2 md:border-black md:border-solid no-scrollbar">
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">What I am fluent in</h2>
@@ -121,7 +121,7 @@ function MiddleColumn() {
 					<SocialsContainer iconSize={32} />
 				</div>
 			</section>
-			<section className="overflow-x-auto min-w-0">
+			<section className="hidden md:block overflow-x-auto min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">View my works</h2>
 					<p className="pb-2">On the right panel, view some of my proudest projects that saw its completion.</p>
@@ -174,12 +174,26 @@ export default function AboutMePage() {
 			return
 		}
 
-		setForceTopbarScrollState(true) // force .scrolled state on topbar for this page
+		const windowResizeUpdateFn = () => {
+			let mq = window.matchMedia("(min-width: 768px)")
+			console.log(mq.matches)
+			if (mq.matches) {
+				setForceTopbarScrollState(true) // force .scrolled state on topbar for this page (for non-mobile users)
+			} else {
+				setForceTopbarScrollState(false)
+			}
+		}
+
+		// check for media query status on every resize
+		window.addEventListener("resize", windowResizeUpdateFn)
+		windowResizeUpdateFn() // initialisation call
+
+		return () => window.removeEventListener("resize", windowResizeUpdateFn)
 	}, [setForceTopbarScrollState])
 
 	return (
 		// @ts-ignore
-		<div className={`flex flex-row min-h-[var(--ht)] md:h-[var(--ht)] w-full justify-start`} style={{"--ht": `calc(100svh - ${topbarHt}px - 2px)`}}>
+		<div className={`flex flex-col md:flex-row min-h-[var(--ht)] md:h-[var(--ht)] w-full justify-start`} style={{"--ht": `calc(100svh - ${topbarHt}px - 2px)`}}>
 			<LeftColumn />
 			<MiddleColumn />
 			<RightColumn />
