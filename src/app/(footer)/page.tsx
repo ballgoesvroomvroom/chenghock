@@ -11,6 +11,7 @@ import graphic_prawn from "@/public/graphics/prawn_2.svg"
 import arrow_pointer from "@/public/icons/thick_arrow.svg"
 
 import demoImg from "@/public/works/asset_01.png"
+import headshot_img from "@/public/graphics/headshot_square.jpg"
 import { SocialsContainer } from "@/app/components/socials";
 
 const BUBBLE_SIZE = [24, 18, 12] // in pixels
@@ -131,61 +132,19 @@ export default function Home() {
         </section>
         {/* 
         // @ts-ignore */}
-        <section className={`flex flex-col p-8 z-10 min-h-[var(--ht)] md:h-[var(--ht)]`} style={{"--ht": `calc(100svh - ${topbarHt}px)`, paddingTop: "50px"}}>
-          <h2 className="text-2xl font-bold pb-4">MY SKILLS AND EXPERTISE<span className="pl-2 font-normal text-base"> (in chronological order)</span></h2>
-          <div className="flex flex-col grow min-h-0 gap-4 md:flex-row">
-            <div id="languages-container" className="shrink w-full bg-primary grid grid-cols-3 sm:grid-cols-5 md:grid-cols-4 h-min">
-              {
-                SKILLS_DATA.map((data, i) => {
-                  return (
-                    <button key={i} ref={el => {skillSelectionRef.current[i] = el}} className={`group relative aspect-square w-full border-solid border-2 border-gray-200 flex justify-center items-center cursor-pointer focus:outline-none hacus:border-black hacus:z-[2] hacus:bg-white hacus:stroke saturate-0 hacus:filter-none transition-colors aspect-square ${skillSelectionIdx === i ? "active" : ""}`}>
-                      <img src={data.image.src} className="w-full h-full" />
-                      <img src={arrow_pointer.src} className="absolute top-0 left-1/2 w-4 h-4 -translate-x-1/2 transition-opacity group-[.active]:opacity-100 opacity-0" />
-                    </button>
-                  )
-                })
-              }
-            </div>
-            <div className="flex flex-col w-full grow min-h-0 bg-primary border-black border-2 border-solid">
-              <div className="border-black border-b-2 border-solid p-2 bg-white">
-                <p ref={skillTitleRef} className="font-bold text-lg">Python</p>
-              </div>
-              <div id="stats-card" className="flex flex-row bg-primary border-black border-b-2 border-solid">
-                {
-                  [["Expert", "30+", "7+"]].map((data, i) => {
-                    return (
-                      <Fragment key={i}>
-                        <div className="flex flex-col grow gap-2 p-4 border-solid border-black border-r-[1px]">
-                          <p className="text-lg">Proficiency</p>
-                          <p className="font-bold text-4xl">{data[0]}</p>
-                          <div className="flex flex-row basis-2 shrink-0 grow-0 h-full border-solid border-black border-[1px] gap-[1px]">
-                            <div className="grow bg-accent">
-                            </div>
-                            <div className="grow bg-accent">
-                            </div>
-                            <div className="grow bg-accent">
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex flex-col grow gap-2 p-4 border-solid border-r-black border-r-[1px]">
-                          <p className="text-lg">Projects</p>
-                          <p className="font-bold text-4xl">{data[1]}</p>
-                        </div>
-                        <div className="flex flex-col grow gap-2 p-4">
-                          <p className="text-lg">Years</p>
-                          <p className="font-bold text-4xl">{data[2]}</p>
-                        </div>
-                      </Fragment>
-                    )
-                  })
-                }
-              </div>
-              <div ref={skillDescriptionRef} className="grow p-2 pt-4 [&>p]:pb-2 overflow-y-auto">
-                <p>What started as a hobby when transitioning from the Roblox game engine soon became a burning desire to write scripts and programs to automate tasks.</p>
-                <p>First started off with CRUD apps with the CLI as an interface. There were many things I could do. Such as interacting with database services to port data to and from in order to sync data.</p>
-                <p>I got the opportunity to leverage on my Python skills for my national examinations (GSCE O-Levels). This also gave me room to develop and refine my Python knowledge further.</p>
-                <p>I then started diving into different use cases, such as web scraping, web server development,exploratory data understanding, and machine learning much later on.</p>
-              </div>
+        <section className={`flex flex-row p-8 z-10 min-h-[var(--ht)] md:h-[var(--ht)] gap-8`} style={{"--ht": `calc(100svh - ${topbarHt}px)`, paddingTop: "50px"}}>
+          <div className="basis-1/2 min-w-0 grow">
+            <h2 className="text-2xl font-bold pb-4">ABOUT ME</h2>
+            <p className="pb-4">I am a  motivated individual, passionate about developing impactful web applications. The web application is the front face of every story, business, xx. Therefore, I strongly believe designing secure yet functional and accessible web applications is a must-have key skill.</p>
+            <p className="pb-4">My latest venture has been interacting with ML models, with my most recent exposure to recommendation engines using cosine similarities.</p>
+            <p className="inline-flex items-end gap-4">
+              Learn more about me and my passion for web applications here
+              <button className="p-2 rounded bg-black-accent text-white whitespace-nowrap">About me</button>
+            </p>
+          </div>
+          <div className="basis-1/2 grow ml-16 origin-top-left rotate-[10deg]">
+            <div id="pictureFrame" className="box-content max-w-[500px] p-2 pb-12 aspect-square bg-white drop-shadow-lg">
+              <img src={headshot_img.src} className="w-full h-full" alt="Picture of me" />
             </div>
           </div>
         </section>
