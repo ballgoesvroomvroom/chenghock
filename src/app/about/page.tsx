@@ -4,6 +4,7 @@ import { SocialsContainer } from "@/app/components/socials"
 import { TopbarContext } from "@/app/components/topbar/topbar"
 import { useContext, useEffect, useRef } from "react";
 
+import { ProjectData, ProjectDataOrder } from "@/app/data/projects";
 import { SKILLS_DATA } from "@/app/data/skills";
 
 import headshot from "@/public/graphics/headshot_square.jpg"
@@ -13,7 +14,7 @@ function LeftColumn() {
 		<div className="flex flex-col h-full basis-1/3 grow shrink-0 border-r-2 border-black border-solid">
 			<div className="p-6">
 				<h1 className="font-bold text-5xl pb-4">I am a student</h1>
-				<p className="text-xl">Diploma in Applied AI & Analytics @ NYP</p>
+				<p className="text-xl">Diploma in Applied AI & Analytics @ Nanyang Polytechnic</p>
 			</div>
 			<div className="shrink border-black border-solid border-t-2 border-b-2 min-h-0">
 				<img className="w-full h-full object-cover" src={headshot.src} />
@@ -133,9 +134,33 @@ function MiddleColumn() {
 
 function RightColumn() {
 	return (
-		<div className="grow shrink min-w-0 basis-1/3">
+		<div className="grow shrink min-w-0 basis-1/3 min-h-0 h-full overflow-y-auto no-scrollbar">
 			<div className="p-4">
 				<h2 className="text-3xl font-bold">Works</h2>
+			</div>
+			<div className="flex flex-col">
+				{
+					ProjectDataOrder.map((projectIds, i) => {
+						return projectIds.map((projectId, j) => {
+							return (
+								<div className="border-solid border-black border-t-2">
+									<img src={ProjectData[projectId].coverImg.src} />
+									<div className="flex flex-row justify-between p-4 border-solid border-black border-t">
+										<div>
+											<p className="text-xl">{ProjectData[projectId].title}</p>
+											<p className="text-slate-800">{ProjectData[projectId].type === 0 ? "Full stack web application" : "Data journalism"}</p>
+										</div>
+										<div className="self-end">
+											<button className="bg-black-accent rounded p-2 text-white">
+												<p>Details</p>
+											</button>
+										</div>
+									</div>
+								</div>
+							)
+						})
+					})
+				}
 			</div>
 		</div>
 	)

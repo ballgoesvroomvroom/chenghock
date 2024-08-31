@@ -1,3 +1,7 @@
+import { StaticImageData } from "next/image"
+
+import demoImg from "@/public/works/asset_01.png"
+
 interface ProjectDataType {
   [index: string]: {
     title: string,
@@ -6,6 +10,7 @@ interface ProjectDataType {
     status: string,
     synopsis: string,
     learning_points: Array<string>,
+    coverImg: StaticImageData,
     technicals: { stack: string, deployment: string, "3rdpartydep": string },
     description: Array<Array<string>>,
     ext_link_demo?: string
@@ -19,6 +24,7 @@ export const ProjectData: ProjectDataType = {
     "type": 0,
     "status": "Refining",
     "ext_link_demo": "https://qriller.com",
+    "coverImg": demoImg,
     "technicals": {
       "stack": "Express.js, Firestore, Next.js",
       "deployment": "Bundled with Webpack, served on Ubuntu Droplet with PM2",
@@ -41,6 +47,7 @@ export const ProjectData: ProjectDataType = {
     "type": 0,
     "status": "Deployed",
     "synopsis": "abc",
+    "coverImg": demoImg,
     "learning_points": [
       "coolio"
     ],
@@ -58,6 +65,7 @@ export const ProjectData: ProjectDataType = {
     "created_on": "December 2023",
     "type": 1,
     "status": "Deployed",
+    "coverImg": demoImg,
     "technicals": {
       "stack": "Next.js, React, PostreSQL, Redis",
       "deployment": "Build and hosted on Vercel",
