@@ -26,7 +26,26 @@ function ProjectDetailBanner({ projectId }: { projectId: string }) {
 }
 
 function ProjectDetailContent({ projectId }: { projectId: string }) {
-  const [activeSection, setActiveSection] = useState(0)
+  const [activeSection, setActiveSection] = useState("#content-0")
+
+
+  // detech when window.location.hash change for anchor links jumping and active content list styling
+  useEffect(() => {
+    const updateHash = () => {
+      let newHash = window.location.hash
+
+      if (newHash.length === 0) {
+        // no hash
+        newHash = "#content-0"
+      } else {
+        setActiveSection(newHash)
+      }
+    }
+
+    window.addEventListener("hashchange", updateHash)
+
+    return () => window.removeEventListener("hashchange", updateHash)
+  }, [])
 
   return (
     <div className="flex flex-col-reverse md:flex-row p-4 gap-12 md:max-h-[500px] overflow-auto border-solid border-black border-t-2">
@@ -34,8 +53,10 @@ function ProjectDetailContent({ projectId }: { projectId: string }) {
         <nav className="flex flex-col whitespace-nowrap pb-14">
           {
             ProjectData[projectId].description.map((sectionContent, i) => {
+              let anchorRef = `#content-${i}`
+
               return (
-                <a key={i} className={`${i === activeSection ? "active" : ""} inline-flex flex-row gap-3 font-bold text-gray-400 [&.active]:text-black`} href={`#${sectionContent[0]}`}>
+                <a key={i} className={`${anchorRef === activeSection ? "active" : ""} inline-flex flex-row gap-3 font-bold text-gray-400 [&.active]:text-black`} href={anchorRef}>
                   <div className="basis-[2px] shrink-0 grow-0 bg-current transition-colors"></div>
                   <span>{sectionContent[0]}</span>
                 </a>
@@ -45,16 +66,16 @@ function ProjectDetailContent({ projectId }: { projectId: string }) {
         </nav>
         <div className="flex flex-col gap-4">
           <h2 className="font-bold text-2xl">External links</h2>
-          <button className="p-2 rounded text-black-accent hocus:text-white hocus:bg-black-accent border-black-accent border-solid border transition-colors">
+          <a className="p-2 rounded text-black-accent hocus:text-white hocus:bg-black-accent border-black-accent border-solid border transition-colors" href={ProjectData[projectId].ext_link_demo} target="_blank">
             <span>Visit site</span>
-          </button>
+          </a>
         </div>
       </div>
       <div className="overflow-auto">
         {
           ProjectData[projectId].description.map((sectionContent, i) => {
             return (
-              <section key={i} className="pb-8">
+              <section key={i} id={`content-${i}`} className="pb-8">
                 <h2 className="font-bold text-2xl pb-4">{sectionContent[0]}</h2>
                 {
                   sectionContent.map((paraContent, j) => {
