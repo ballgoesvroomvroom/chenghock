@@ -114,7 +114,7 @@ export default function Home() {
           <p className="pb-4">My latest venture has been interacting with ML models, with my most recent exposure to recommendation engines using cosine similarities.</p>
           <p className="inline-flex items-end gap-4">
             Learn more about me and my passion for web applications here
-            <button className="p-2 rounded text-black-accent hocus:text-white hocus:bg-black-accent border-black-accent border-solid border transition-colors"><span>About me</span></button>
+            <a className="p-2 rounded text-black-accent hocus:text-white hocus:bg-black-accent border-black-accent border-solid border transition-colors" href="/about" target="_blank"><span>About me</span></a>
           </p>
         </div>
         <div className="absolute top-0 -z-10 opacity-20 sm:relative sm:opacity-100 sm:basis-1/2 sm:grow ml-16 origin-top-left rotate-[10deg]">
