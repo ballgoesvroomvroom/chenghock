@@ -1,6 +1,7 @@
 import { StaticImageData } from "next/image"
 
 import demoImg from "@/public/works/asset_01.png"
+import demoImg2 from "@/public/works/asset_02.png"
 
 interface ProjectDataType {
   [index: string]: {
@@ -10,6 +11,7 @@ interface ProjectDataType {
     status: string,
     synopsis: string,
     learning_points: Array<string>,
+    logo: StaticImageData,
     coverImg: StaticImageData,
     technicals: { stack: string, deployment: string, "3rdpartydep": string },
     description: Array<Array<string>>,
@@ -24,13 +26,14 @@ export const ProjectData: ProjectDataType = {
     "type": 0,
     "status": "Refining",
     "ext_link_demo": "https://qriller.com",
+    "logo": demoImg2,
     "coverImg": demoImg,
     "technicals": {
       "stack": "Express.js, Firestore, Next.js",
       "deployment": "Bundled with Webpack, served on Ubuntu Droplet with PM2",
       "3rdpartydep": "Google, Stripe, GSAP"
     },
-    "synopsis": "A full-stack web application that serves as the main business entry for Qriller, a business involved in transacting and generation of procedural math worksheets.",
+    "synopsis": "Full stack web application for the generation and transacting of Math worksheets.",
     "learning_points": [
       "Use of Webpack to bundle modules and dependencies",
       "Implementing payment services through the use of Stripe as a payment processor and Google Pay as a payment gateway"
@@ -47,6 +50,7 @@ export const ProjectData: ProjectDataType = {
     "type": 0,
     "status": "Deployed",
     "synopsis": "abc",
+    "logo": demoImg2,
     "coverImg": demoImg,
     "learning_points": [
       "coolio"
@@ -65,6 +69,7 @@ export const ProjectData: ProjectDataType = {
     "created_on": "December 2023",
     "type": 1,
     "status": "Deployed",
+    "logo": demoImg2,
     "coverImg": demoImg,
     "technicals": {
       "stack": "Next.js, React, PostreSQL, Redis",
