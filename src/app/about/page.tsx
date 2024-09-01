@@ -152,7 +152,7 @@ function RightColumn() {
 										</div>
 										<div className="self-end">
 											<button className="bg-black-accent rounded p-2 text-white">
-												<p>Details</p>
+												<span>Details</span>
 											</button>
 										</div>
 									</div>
