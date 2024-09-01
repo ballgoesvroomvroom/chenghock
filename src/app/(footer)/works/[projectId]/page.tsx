@@ -45,7 +45,7 @@ function ProjectDetailContent({ projectId }: { projectId: string }) {
         </nav>
         <div className="flex flex-col gap-4">
           <h2 className="font-bold text-2xl">External links</h2>
-          <button className="p-2 bg-black-accent rounded text-white">
+          <button className="p-2 rounded text-black-accent hocus:text-white hocus:bg-black-accent border-black-accent border-solid border transition-colors">
             <span>Visit site</span>
           </button>
         </div>
