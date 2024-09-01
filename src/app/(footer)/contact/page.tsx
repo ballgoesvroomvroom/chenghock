@@ -12,7 +12,7 @@ export default function ContactPage() {
 					<p className="pb-6 md:pb-12">I keep all my socials open for direct messaging, please feel free to reach out to me on whichever channel is your preference.</p>
 					<SocialsContainer iconSize={48} />
 				</div>
-				<div className="hidden md:flex flex-col gap-2 items-start opacity-40">
+				<div className="hidden md:flex flex-col gap-2 items-start opacity-40 hover:opacity-100 transition-opacity">
 					<img src={quotation_icon.src} style={{transform: "scaleX(-1)"}} />
 					<p className="font-bold text-4xl">A single leaf working alone provides no shade.</p>
 					<div className="flex gap-4 self-end">
