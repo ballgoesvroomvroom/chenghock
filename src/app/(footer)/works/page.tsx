@@ -79,9 +79,9 @@ export default function Home() {
                         </ul>
                         <div className="flex gap-2 self-end mt-auto">
                           {
-                            ProjectData[projectId].ext_link_demo != null ? <a className="font-bold p-2 border-2 border-black border-solid" href={ProjectData[projectId].ext_link_demo}>TRY</a> : ""
+                            ProjectData[projectId].ext_link_demo != null ? <a className="font-bold p-2 border-2 border-black border-solid" href={ProjectData[projectId].ext_link_demo} target="_blank">TRY</a> : ""
                           }
-                          <a className="font-bold text-white p-2 bg-accent border-2 border-black border-solid" href={`/works/${projectId}`}>MORE</a>
+                          <a className="font-bold text-white p-2 bg-accent border-2 border-black border-solid" href={`/works/${projectId}`} target="_blank">MORE</a>
                         </div>
                       </div>
                     </div>
