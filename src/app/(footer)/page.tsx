@@ -78,11 +78,11 @@ export default function Home() {
       {/*
       // @ts-ignore */}
       <section id="landing" className={`p-8 flex-col gap-8 md:flex-row grow flex md:items-center justify-between bg-contain bg-no-repeat bg-center min-h-[var(--ht)] md:h-[var(--ht)]`} style={{"--ht": `calc(100svh - ${topbarHt}px)`, backgroundImage: `url(${graphic_fish.src})`}}>
-        <div className="basis-1/2">
+        <div className="grow basis-1/2">
           <h1 className="text-4xl md:text-6xl font-bold" style={{lineHeight: "1.1"}}>HELLO, I AM<br /><span data-stroke="CHENG HOCK" className="text-accent text-stroke-black text-5xl md:text-8xl stroke-width" style={{letterSpacing: "3px"}}>CHENG HOCK</span></h1>
           <p className="pt-6">Welcome to aquarium for my projects! （。＾▽＾）</p>
         </div>
-        <div className="flex flex-col items-end md:items-start gap-3 justify-end grow shrink basis-1/2 min-h-0">
+        <div className="flex flex-col items-end md:items-start gap-3 justify-end shrink basis-1/2 min-h-0">
           <h2 className="font-bold text-2xl text-stroke-bg" data-stroke="Full Stack Web Application Developer + Data Analyst">Full Stack Web Application Developer + Data Analyst</h2>
           <div id="imageContainer" className="min-h-0 grow">
             <figure id="imageFrame" className="border-2 border-black aspect-video h-auto max-w-full">
@@ -114,7 +114,7 @@ export default function Home() {
           <p className="pb-4">My latest venture has been interacting with ML models, with my most recent exposure to recommendation engines using cosine similarities.</p>
           <p className="inline-flex items-end gap-4">
             Learn more about me and my passion for web applications here
-            <button className="p-2 rounded bg-black-accent text-white whitespace-nowrap"><span>About me</span></button>
+            <button className="p-2 rounded text-black-accent hocus:text-white hocus:bg-black-accent border-black-accent border-solid border transition-colors"><span>About me</span></button>
           </p>
         </div>
         <div className="absolute top-0 -z-10 opacity-20 sm:relative sm:opacity-100 sm:basis-1/2 sm:grow ml-16 origin-top-left rotate-[10deg]">
@@ -126,16 +126,18 @@ export default function Home() {
       <section className="flex flex-col justify-center items-center p-8 z-10" style={{paddingTop: "50px", height: `calc(100svh - ${topbarHt}px)`}}>
         <h2 className="text-2xl font-bold">MY WORKS</h2>
       </section>
-      <section className="flex flex-col p-8 z-10 bg-contain bg-no-repeat bg-right-top" style={{paddingTop: "100px", height: `calc(100svh - ${topbarHt}px)`, backgroundImage: `url(${graphic_prawn.src})`}}>
+      {/*
+      // @ts-ignore */}
+      <section className="flex flex-col p-8 z-10 bg-contain bg-no-repeat bg-right-top min-h-[var(--ht)] md:h-[var(--ht)]" style={{paddingTop: "100px", "--ht": `calc(100svh - ${topbarHt}px)`, backgroundImage: `url(${graphic_prawn.src})`}}>
         <section className="[&>p]:pb-2 max-w-[50%]">
           <h2 className="text-2xl font-bold pb-4">REACH OUT TO ME</h2>
           <p>I'd be happy to accept any form of feedback or guidance you have to offer <span>me. :)</span></p>
           <p>I am readily contactable at <a href="mailto:hi@chenghock.com" className="link" target="_blank">hi@chenghock.com</a>.<br />Alternatively, I keep my Telegram open at <a href="https://t.me/chenghock" className="link" target="_blank">t.me/chenghock</a>.</p>
           <p>Looking forward to our connection!</p>
         </section>
-        <section className="max-w-1/2 mt-[200px]">
+        <section className="max-w-1/2 mt-[100px] md:mt-[200px]">
           <h2 className="text-2xl font-bold pb-4">MY SOCIALS</h2>
-          <SocialsContainer iconSize={84} />
+          <SocialsContainer iconSize={64} />
         </section>
       </section>
     </main>
