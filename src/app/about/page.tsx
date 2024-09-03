@@ -11,12 +11,12 @@ import headshot from "@/public/graphics/headshot_square.jpg"
 
 function LeftColumn() {
 	return (
-		<div className="flex flex-col md:h-full basis-1/3 grow md:shrink-0 md:border-r-2 md:border-black md:border-solid">
+		<div className="flex flex-col basis-[var(--ht)] md:basis-1/3 h-full grow md:shrink-0 md:border-r-2 md:border-black md:border-solid">
 			<div className="p-6">
 				<h1 className="font-bold text-5xl pb-4">I am a student</h1>
 				<p className="text-xl">Diploma in Applied AI & Analytics @ Nanyang Polytechnic</p>
 			</div>
-			<div className="shrink border-black border-solid border-t-2 border-b-2 min-h-0">
+			<div className="grow shrink border-black border-solid border-t-2 border-b-2 min-h-0">
 				<img className="w-full h-full object-cover" src={headshot.src} />
 			</div>
 			<div className="flex flex-col w-full self-end p-4">
