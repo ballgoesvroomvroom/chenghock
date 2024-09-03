@@ -1,4 +1,4 @@
-import { SocialsContainer } from "@/app/components/socials";
+import { SocialsContainer, SOCIALS_LINKEDIN, SOCIALS_GITHUB, SOCIALS_TELEGRAM, SOCIALS_EMAIL } from "@/app/components/socials";
 
 import quotation_icon from "@/public/icons/quotes.svg"
 
@@ -22,18 +22,22 @@ export default function ContactPage() {
 				</div>
 			</div>
 			<div className="flex flex-wrap gap-4 mt-12 md:mt-24">
-				<button className="p-3 flex flex-col gap-3 border-solid border-black border-2">
+				<a className="p-3 flex flex-col gap-3 border-solid border-black border-2" href={SOCIALS_LINKEDIN} target="_blank">
 					<p className="font-bold text-lg">LinkedIn</p>
 					<p>Chong Cheng Hock</p>
-				</button>
-				<button className="p-3 flex flex-col gap-3 border-solid border-black border-2">
+				</a>
+				<a className="p-3 flex flex-col gap-3 border-solid border-black border-2" href={SOCIALS_GITHUB} target="_blank">
 					<p className="font-bold text-lg">GitHub</p>
 					<p>Ballgoesvroomvroom</p>
-				</button>
-				<button className="p-3 flex flex-col gap-3 border-solid border-black border-2">
+				</a>
+				<a className="p-3 flex flex-col gap-3 border-solid border-black border-2" href={SOCIALS_TELEGRAM} target="_blank">
 					<p className="font-bold text-lg">Telegram</p>
 					<p>cheng_hock</p>
-				</button>
+				</a>
+				<a className="p-3 flex flex-col gap-3 border-solid border-black border-2" href={SOCIALS_EMAIL} target="_blank">
+					<p className="font-bold text-lg">Email</p>
+					<p>hi@chenghock.com</p>
+				</a>
 			</div>
 		</div>
 	)
