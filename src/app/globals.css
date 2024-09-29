@@ -12,6 +12,14 @@ a.link {
   text-decoration-color: oklch(var(--a));
 }
 
+@keyframes w-grow {
+  from {
+    max-width: 0;
+  } to {
+    max-width: 1000px;
+  }
+}
+
 .text-stroke-black,
 .text-stroke-bg {
   --text-stroke-width: 6px;

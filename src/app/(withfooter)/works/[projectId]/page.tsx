@@ -8,11 +8,11 @@ import { ProjectData } from "@/app/data/projects"
 import { StaticImageData } from "next/image";
 import { notFound } from "next/navigation";
 
-function ProjectDetailBanner({ projectId }: { projectId: string }) {
+function ProjectDetailBanner({ projectId, isActive }: { projectId: string, isActive: boolean }) {
   return (
     <div className="w-full flex justify-between p-4 gap-4 border-solid border-black border-b-2">
       <div className="">
-        <img className="float-left mr-3 w-12 md:w-16 aspect-square min-w-0" src={ProjectData[projectId].logo.src} />
+        <img className="w-full mr-3 w-12 md:w-16 aspect-square min-w-0" src={ProjectData[projectId].logo.src} />
         <div className="flex flex-col">
           <h1 className="font-bold text-4xl">{ProjectData[projectId].title}</h1>
           <p>{ProjectData[projectId].synopsis}</p>

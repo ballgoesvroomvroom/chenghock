@@ -3,6 +3,11 @@
 import { TopbarContext } from "@/app/components/topbar/topbar";
 import { useContext, useEffect, useRef, Fragment, useState, useMemo } from "react";
 
+import { gsap } from "gsap";
+
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
 import { SKILLS_DATA } from "@/app/data/skills";
 
 import graphic_fish from "@/public/graphics/fish.svg"
@@ -13,10 +18,13 @@ import arrow_pointer from "@/public/icons/thick_arrow.svg"
 import demoImg from "@/public/works/asset_01.png"
 import headshot_img from "@/public/graphics/headshot_square.jpg"
 import { SocialsContainer } from "@/app/components/socials";
+import { useGSAP } from "@gsap/react";
 
 const BUBBLE_SIZE = [24, 18, 12] // in pixels
 const BUBBLE_COUNT = 20
 const BUBBLE_LEFT_OFFSET = `${3 +Math.random() *50}px`
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 export default function Home() {
   const { topbarHt } = useContext(TopbarContext)
@@ -73,8 +81,15 @@ export default function Home() {
     }
   }, [bubbleWindowRef])
 
+  const workSectionRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+
+  }, {scope: workSectionRef})
+  // GSAP scroll trigger
+
   return (
-    <main>
+    <main className="mb-24">
       {/*
       // @ts-ignore */}
       <section id="landing" className={`p-8 flex-col gap-8 md:flex-row grow flex md:items-center justify-between bg-contain bg-no-repeat bg-center min-h-[var(--ht)] md:h-[var(--ht)]`} style={{"--ht": `calc(100svh - ${topbarHt}px)`, backgroundImage: `url(${graphic_fish.src})`}}>
@@ -123,8 +138,13 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="flex flex-col justify-center items-center p-8 z-10" style={{paddingTop: "50px", height: `calc(100svh - ${topbarHt}px)`}}>
+      {/*
+      // @ts-ignore */}
+      <section ref={workSectionRef} className="flex flex-col justify-center items-center gap-4 p-8 z-10 min-h-[var(--ht)] md:h-[var(--ht)]" style={{paddingTop: "50px", "--ht": `calc(100svh - ${topbarHt}px)`}}>
         <h2 className="text-2xl font-bold">MY WORKS</h2>
+        <figure className="border-solid border-black border-2 w-full h-auto md:h-full md:w-auto min-h-0">
+          <img src={demoImg.src} className="w-full h-full" />
+        </figure>
       </section>
       {/*
       // @ts-ignore */}
