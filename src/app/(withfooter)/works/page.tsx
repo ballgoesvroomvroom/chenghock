@@ -10,7 +10,7 @@ import arrow_pointer from "@/public/icons/thick_arrow.svg"
 import demoImg from "@/public/works/asset_01.png"
 import { StaticImageData } from "next/image";
 
-function ProjectList() {
+function ProjectLista() {
 	let [activeIdx, setActiveIdx] = useState(0)
 
 	const containerRef = useRef<HTMLDivElement>(null)
@@ -34,8 +34,8 @@ function ProjectList() {
 				// height: entry.contentRect.height
 				if (child.classList.contains("active")) {
 					let rect = child.getBoundingClientRect()
-					console.log("rect", rect.width)
-					setCardWidth(rect.width)
+					console.log("rect.width *0.5625", rect.width *0.5625)
+					// setCardWidth(rect.width)
 					setCardHeight(rect.width *0.5625) // 16:9 aspect ratio
 					encounteredActive = true
 				} else {
@@ -67,14 +67,17 @@ function ProjectList() {
 		}
 
 		for (let card of cardsRef.current) {
-			card?.addEventListener("mouseenter", () => {
+			if (!card) {
+				continue
+			}
+			card.addEventListener("mouseenter", () => {
 				if (card.classList.contains("active")) {
 					return
 				}
 				card.style.minWidth = "64px"
 			})
 
-			card?.addEventListener("mouseleave", () => {
+			card.addEventListener("mouseleave", () => {
 				if (card.classList.contains("active")) {
 					return
 				}
@@ -82,6 +85,31 @@ function ProjectList() {
 			})
 		}
 	}, [cardsRef])
+
+	useEffect(() => {
+		if (!cardsRef.current) {
+			return
+		}
+
+		const obs = new ResizeObserver((entries) => {
+			let card = entries[0].target
+			let rect = card.getBoundingClientRect()
+
+			setCardWidth(rect.width)
+		})
+
+		// observe active card only
+		let activeCard = cardsRef.current[activeIdx]
+		if (!activeCard) {
+			return
+		}
+		obs.observe(activeCard)
+
+		// cleanup
+		return () => {
+			obs.disconnect()
+		}
+	}, [cardsRef, activeIdx])
 
 
 	return (
@@ -92,12 +120,12 @@ function ProjectList() {
 				ProjectDataOrder[0].map((projectId, i) => 
 					<div key={i} ref={el => {cardsRef.current[i] = el}}
 						className={
-							`group relative grow p-4 bg-white min-w-0 overflow-clip box-border ${activeIdx === i ? "active" : ""} min-w-0`
+							`group relative p-4 bg-white min-w-0 box-border overflow-clip box-border ${activeIdx === i ? "active" : ""} min-w-0`
 						}
 						style={{
-						flexBasis: activeIdx === i ? "5000px" : "50px",
 						minWidth: activeIdx === i ? "auto" : "0",
-						// flexGrow: activeIdx === i ? 1 : 0,
+						flexGrow: activeIdx === i ? 1 : 0,
+						flexShrink: activeIdx === i ? 0 : 1,
 						// maxWidth: activeIdx === i ? cardWidth : closedCardWidth,
 						height: cardHeight
 					}}>
@@ -127,6 +155,108 @@ function ProjectList() {
 					// 	</div>
 					// 	<p className="p-2 z-10 block">{i +1}</p>
 					// </div>
+				)
+			}
+		</div>
+	)
+}
+
+interface HTMLCardElement extends HTMLDivElement {
+	_mouseEnter?: () => void,
+	_mouseLeave?: () => void
+}
+
+function ProjectList() {
+	let [activeIdx, setActiveIdx] = useState(0)
+
+	const [cardWidth, setCardWidth] = useState(0)
+	const [cardHeight, setCardHeight] = useState(0)
+	const [hoverCardIdx, setHoverCardIdx] = useState<number|null>(0)
+
+	const cardsRef = useRef<(HTMLCardElement|null)[]>([])
+	const focusCard = (i: number, card: HTMLCardElement) => {
+		console.log("hover", i)
+		setHoverCardIdx(i) // set space
+	}
+	const unfocusCard = (i: number, card: HTMLCardElement) => {
+		setHoverCardIdx(null) // reset
+	}
+	useEffect(() => {
+		if (!cardsRef.current) {
+			return
+		}
+
+		// card hover events
+		let i = 0;
+		for (let card of cardsRef.current) {
+			if (!card) {
+				continue
+			}
+
+			let ii = i++
+			const mouseEnter = () => focusCard(ii, card)
+			const mouseLeave = () => unfocusCard(ii, card)
+
+			card.addEventListener("mouseenter", mouseEnter)
+			card.addEventListener("mouseleave", mouseLeave)
+
+			card._mouseEnter = mouseEnter
+			card._mouseLeave = mouseLeave
+		}
+
+		// observe active card to set card width for inner image
+		let obs = new ResizeObserver((entries) => {
+			let activeCard = entries[0].target
+			let rect = activeCard.getBoundingClientRect()
+
+			setCardWidth(rect.width)
+			setCardHeight(rect.width *.5625) // 16:9 aspect ratio
+		})
+		if (cardsRef.current[activeIdx]) {
+			obs.observe(cardsRef.current[activeIdx])
+		}
+
+		// cleanup function
+		return () => {
+			obs.disconnect()
+
+			for (let card of cardsRef.current) {
+				if (card?._mouseEnter) {
+					card?.removeEventListener("mouseenter", card._mouseEnter)
+				}
+				if (card?._mouseLeave) {
+					card?.removeEventListener("mouseleave", card._mouseLeave)
+				}
+			}
+		}
+	}, [activeIdx, cardsRef])
+
+	return (
+		<div className="relative w-full h-12">
+			{
+				ProjectDataOrder[0].map((projectId, i) => 
+					<div key={i} ref={el => {cardsRef.current[i] = el}}
+						className={
+							`group relative h-full ${activeIdx === i ? "active" : ""} float-left block`
+						}
+						style={{
+							width: "100%",
+							maxWidth: `${(activeIdx === i ? 10 : (hoverCardIdx === i ? 2 : 1)) /(ProjectDataOrder[0].length +9 +(hoverCardIdx != null ? 1 : 0)) *100}%`,
+							zIndex: ProjectDataOrder[0].length -i
+						}}
+					>
+						<div className="absolute top-0 right-0 z-10 flex flex-col justify-between">
+							<div className="text-right z-10">{i +1}</div>
+							<p className="group-[:not(.active):hover]:block hidden z-10">{ProjectData[projectId].title}</p>
+						</div>
+						<img className="absolute top-0 right-0"
+							style={{
+								width: cardWidth,
+								height: cardHeight,
+								maxWidth: "unset",
+							}}
+							src={ProjectData[projectId].coverImg.src}/>
+					</div>
 				)
 			}
 		</div>
