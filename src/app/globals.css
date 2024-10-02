@@ -20,6 +20,14 @@ a.link {
   }
 }
 
+@keyframes heightscale {
+  from {
+    transform: translateY(-50%);
+  } to {
+    transform: translateY(10%);
+  }
+}
+
 .text-stroke-black,
 .text-stroke-bg {
   --text-stroke-width: 6px;

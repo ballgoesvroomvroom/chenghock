@@ -94,7 +94,7 @@ export default function Home() {
       // @ts-ignore */}
       <section id="landing" className={`p-8 flex-col gap-8 md:flex-row grow flex md:items-center justify-between bg-contain bg-no-repeat bg-center min-h-[var(--ht)] md:h-[var(--ht)]`} style={{"--ht": `calc(100svh - ${topbarHt}px)`, backgroundImage: `url(${graphic_fish.src})`}}>
         <div className="grow basis-1/2">
-          <h1 className="text-4xl md:text-6xl font-bold" style={{lineHeight: "1.1"}}>HELLO, I AM<br /><span data-stroke="CHENG HOCK" className="text-accent text-stroke-black text-5xl md:text-8xl stroke-width" style={{letterSpacing: "3px"}}>CHENG HOCK</span></h1>
+          <h1 className="text-4xl md:text-6xl font-bold" style={{lineHeight: "1.1"}}>HELLO, I AM<br /><span data-stroke="CHENG HOCK" className="text-accent text-stroke-black text-5xl md:text-9xl stroke-width" style={{letterSpacing: "3px"}}>CHENG HOCK</span></h1>
           <p className="pt-6">Welcome to aquarium for my projects! （。＾▽＾）</p>
         </div>
         <div className="flex flex-col items-end md:items-start gap-3 justify-end shrink basis-1/2 min-h-0">

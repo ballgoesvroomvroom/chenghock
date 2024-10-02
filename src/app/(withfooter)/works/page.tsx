@@ -10,158 +10,7 @@ import arrow_pointer from "@/public/icons/thick_arrow.svg"
 import demoImg from "@/public/works/asset_01.png"
 import { StaticImageData } from "next/image";
 
-function ProjectLista() {
-	let [activeIdx, setActiveIdx] = useState(0)
-
-	const containerRef = useRef<HTMLDivElement>(null)
-	let [cardWidth, setCardWidth] = useState(100)
-	let [cardHeight, setCardHeight] = useState(281.25)
-	let [closedCardWidth, setClosedCardWidth] = useState(200)
-	useEffect(() => {
-		if (!containerRef.current) {
-			return
-		}
-
-		const obs = new ResizeObserver((entries) => {
-			let container = entries[0].target
-
-			// local states
-			let encounteredActive = false
-			let encounteredInactive = false
-
-			for (let child of container.children) {
-				// width: entry.contentRect.width
-				// height: entry.contentRect.height
-				if (child.classList.contains("active")) {
-					let rect = child.getBoundingClientRect()
-					console.log("rect.width *0.5625", rect.width *0.5625)
-					// setCardWidth(rect.width)
-					setCardHeight(rect.width *0.5625) // 16:9 aspect ratio
-					encounteredActive = true
-				} else {
-					setClosedCardWidth(child.getBoundingClientRect().width)
-					encounteredInactive = true
-				}
-
-				if (encounteredActive && encounteredInactive) {
-					// encountered both
-					// only interested in one occurrence
-					return
-				}
-			}
-		})
-
-		// attach observer to container
-		obs.observe(containerRef.current)
-
-		// cleanup
-		return () => {
-			obs.disconnect()
-		}
-	}, [containerRef])
-
-	const cardsRef = useRef<(HTMLDivElement|null)[]>([])
-	useEffect(() => {
-		if (!cardsRef.current) {
-			return
-		}
-
-		for (let card of cardsRef.current) {
-			if (!card) {
-				continue
-			}
-			card.addEventListener("mouseenter", () => {
-				if (card.classList.contains("active")) {
-					return
-				}
-				card.style.minWidth = "64px"
-			})
-
-			card.addEventListener("mouseleave", () => {
-				if (card.classList.contains("active")) {
-					return
-				}
-				card.style.minWidth = "0"
-			})
-		}
-	}, [cardsRef])
-
-	useEffect(() => {
-		if (!cardsRef.current) {
-			return
-		}
-
-		const obs = new ResizeObserver((entries) => {
-			let card = entries[0].target
-			let rect = card.getBoundingClientRect()
-
-			setCardWidth(rect.width)
-		})
-
-		// observe active card only
-		let activeCard = cardsRef.current[activeIdx]
-		if (!activeCard) {
-			return
-		}
-		obs.observe(activeCard)
-
-		// cleanup
-		return () => {
-			obs.disconnect()
-		}
-	}, [cardsRef, activeIdx])
-
-
-	return (
-		<div className="relative flex flex-row justify-start w-full min-w-0 mx-4 my-8"
-			ref={containerRef}
-		>
-			{
-				ProjectDataOrder[0].map((projectId, i) => 
-					<div key={i} ref={el => {cardsRef.current[i] = el}}
-						className={
-							`group relative p-4 bg-white min-w-0 box-border overflow-clip box-border ${activeIdx === i ? "active" : ""} min-w-0`
-						}
-						style={{
-						minWidth: activeIdx === i ? "auto" : "0",
-						flexGrow: activeIdx === i ? 1 : 0,
-						flexShrink: activeIdx === i ? 0 : 1,
-						// maxWidth: activeIdx === i ? cardWidth : closedCardWidth,
-						height: cardHeight
-					}}>
-						<div className="absolute top-0 right-0 z-10 flex flex-col justify-between">
-							<div className="text-right z-10">{i +1}</div>
-							<p className="group-[:not(.active):hover]:block hidden z-10">{ProjectData[projectId].title}</p>
-						</div>
-						<img className="absolute top-0 right-0"
-							style={{
-								maxWidth: cardWidth,
-								width: cardWidth,
-								height: cardHeight
-							}}
-							src={ProjectData[projectId].coverImg.src}/>
-					</div>
-					// <div key={i} className={`relative border-2 border-black border-solid inline-flex justify-end min-w-0 w-fit group ${activeIdx === i && "card-active"} [&.card-active]:grow`} onClick={() => setActiveIdx(i)}>
-					// 	<div className="flex flex-row group-[.card-active]:basis-1/2">
-					// 		<div className="basis-[256px] min-w-0 p-4 flex flex-col items-center grow-0 shrink-0 bg-white">
-					// 			<h2 className="text-2xl font-bold">{ProjectData[projectId].title}</h2>
-					// 		</div>
-					// 		<figure className="relative h-full">
-					// 			<img src={ProjectData[projectId].coverImg.src} className="h-full object-cover object-center" />
-					// 			<div className="absolute bottom-0 left-0 w-full p-2 bg-[#1a1a1ade]">
-					// 				<p className="w-full text-sm text-white text-center">Qriller.com - Procedural Generation of O/N-Levels Math Worksheets</p>
-					// 			</div>
-					// 		</figure>
-					// 	</div>
-					// 	<p className="p-2 z-10 block">{i +1}</p>
-					// </div>
-				)
-			}
-		</div>
-	)
-}
-
-interface HTMLCardElement extends HTMLDivElement {
+interface HTMLCardElement extends HTMLButtonElement {
 	_mouseEnter?: () => void,
 	_mouseLeave?: () => void,
 	_click?: () => void
@@ -179,12 +28,12 @@ function ProjectList() {
 	const [expandedCardWidth, setExpandedCardWidth] = useState((100 -mainCardWidth -CARD_HOVER_GROWTH) /(ProjectDataOrder[0].length -1) +CARD_HOVER_GROWTH) // remaining space + a bit more
 	const [restCardWidth, setRestCardWidth] = useState((100 -mainCardWidth -(hoverCardIdx == null ? 0 : CARD_HOVER_GROWTH)) /(ProjectDataOrder[0].length -1)) // remaining spce
 
+	const containerRef = useRef<HTMLDivElement>(null)
 	const cardsRef = useRef<(HTMLCardElement|null)[]>([])
 	const focusCard = (i: number, card: HTMLCardElement) => {
 		if (card.classList.contains("active")) {
 			return // do nothing
 		}
-		console.log("hover", i)
 		setHoverCardIdx(i) // set space
 	}
 	const unfocusCard = (i: number, card: HTMLCardElement) => {
@@ -205,6 +54,20 @@ function ProjectList() {
 			setHoverCardIdx(null)
 		}
 	}
+
+	// enforce 16:9 height on cards on screen size change
+	const updateCardHt = () => {
+		if (!containerRef.current) {
+			return
+		}
+
+		let rect = containerRef.current.getBoundingClientRect()
+		let computedCardWidth = mainCardWidth /100 *rect.width
+		setCardWidth(computedCardWidth)
+		setCardHeight(computedCardWidth *.5625) // 16:9 aspect ratio
+		console.log("height", rect.width *.5625)
+	}
+
 	useEffect(() => {
 		if (!cardsRef.current) {
 			return
@@ -231,23 +94,8 @@ function ProjectList() {
 			card._click = click
 		}
 
-		// observe active card to set card width for inner image
-		let obs = new ResizeObserver((entries) => {
-			let activeCard = entries[0].target
-			let rect = activeCard.getBoundingClientRect()
-
-			setCardWidth(rect.width)
-			setCardHeight(rect.width *.5625) // 16:9 aspect ratio
-			console.log("HEIGHT!", rect.width *.5625)
-		})
-		if (cardsRef.current[activeIdx]) {
-			obs.observe(cardsRef.current[activeIdx])
-		}
-
 		// cleanup function
 		return () => {
-			obs.disconnect()
-
 			for (let card of cardsRef.current) {
 				if (card?._mouseEnter) {
 					card?.removeEventListener("mouseenter", card._mouseEnter)
@@ -260,25 +108,32 @@ function ProjectList() {
 				}
 			}
 		}
-	}, [activeIdx, cardsRef])
+	}, [containerRef, activeIdx, cardsRef])
 
 	useEffect(() => {
-		console.log("hovered", hoverCardIdx)
-		console.log("rest", restCardWidth)
-		console.log("expanded", expandedCardWidth)
-		console.log("total", restCardWidth *(ProjectDataOrder[0].length -1) +expandedCardWidth)
+		// enforce 16:9 height on cards
+		window.addEventListener("resize", updateCardHt)
+		console.log("hooked")
+		updateCardHt() // initial set
+
+		return () => {
+			window.removeEventListener("resize", updateCardHt)
+		}
+	}, [])
+
+	useEffect(() => {
 		setRestCardWidth((100 -mainCardWidth -(hoverCardIdx == null ? 0 : CARD_HOVER_GROWTH)) /(ProjectDataOrder[0].length -1))
 	}, [hoverCardIdx])
 
-	console.log("restCardWidth", restCardWidth)
 
 	return (
-		<div className="relative w-full">
+		<div className="relative w-full md:px-32">
+			<div ref={containerRef} className="w-full">
 			{
 				ProjectDataOrder[0].map((projectId, i) => 
-					<div key={i} ref={el => {cardsRef.current[i] = el}}
+					<button key={i} ref={el => {cardsRef.current[i] = el}}
 						className={
-							`group relative justify-end h-full ${activeIdx === i ? "active" : ""} overflow-clip float-left block transition-all cursor-pointer`
+							`workcard group relative h-full ${activeIdx === i ? "active" : ""} overflow-clip float-left block transition-all cursor-pointer`
 						}
 						style={{
 							width: "100%",
@@ -294,19 +149,28 @@ function ProjectList() {
 							<div className="text-right">{i +1}</div>
 							<p className="group-[:not(.active):hover]:block hidden z-10 text-accent">{ProjectData[projectId].title}</p>
 						</div>
-						<div className="absolute z-10 flex flex-col items-center justify-end p-2 bg-[#1a1a1ab5] text-white text-2xl font-bold" style={{
+						<div className="absolute top-0 right-0 flex flex-col items-center justify-end" style={{
 							width: cardWidth,
 							height: cardHeight,
 							display: activeIdx === i ? "flex" : "none",
-							background: "linear-gradient(0deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 10%)",
 							zIndex: 2
 						}}>
-							<p>{ProjectData[projectId].title}</p>
+							<div className="p-2 w-full bg-[#1a1a1ad4] backdrop-blur-[2px] flex flex-row items-end">
+								<p className="text-lg text-white grow">{ProjectData[projectId].title}</p>
+								<a href={`/works/${projectId}`} className="inline-flex border-2 border-black border-solid items-center px-2 bg-white text-lg text-black rounded"><span>More</span></a>
+							</div>
+						</div>
+						<div className="absolute top-0 right-0 w-full" style={{
+							height: cardHeight,
+							display: activeIdx -1 === i ? "block" : "none",
+							background: "linear-gradient(90deg, rgba(0,0,0,0) 92%, rgba(0,0,0,0.4) 100%)",
+							zIndex: 2
+						}}>
 						</div>
 						<div className="absolute top-0 right-0 w-full" style={{
 							height: cardHeight,
 							display: activeIdx === i ? "none" : "block",
-							background: "linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 40%)",
+							background: "linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 8%)",
 							zIndex: 3
 						}}>
 						</div>
@@ -326,9 +190,34 @@ function ProjectList() {
 								maxWidth: "unset"
 							}}
 							src={ProjectData[projectId].coverImg.src}/>
-					</div>
+					</button>
 				)
 			}
+			</div>
+		</div>
+	)
+}
+
+function Journey() {
+	return (
+		<div className="flex flex-row justify-center items-center p-4 -mt-32 box-content min-h-svh bg-black-accent text-white">
+			<div className="max-w-[800px] flex flex-row gap-4">
+				<div className="flex flex-col">
+					<h1 className="font-bold text-9xl whitespace-nowrap">6 Years</h1>
+					<p className="text-2xl">of creating experiences</p>
+				</div>
+				<div className="mr-12 border-white border-dotted border-0 border-r-[8px] origin-top transition-transform" style={{
+					animationName: "heightscale",
+					animationDuration: "2s",
+					animationDirection: "alternate",
+					animationIterationCount: "infinite",
+				}}>
+				</div>
+				<div className="min-w-0 shrink">
+					<p>A passionate and motivated individual since young. I have always been passionate to pick up new technical skills within the use of computers.</p>
+					<p>Over the course of 6 years, the many projects I undertook has allowed me to accumulate experiences and skillsets.</p>
+				</div>
+			</div>
 		</div>
 	)
 }
@@ -365,11 +254,14 @@ export default function Home() {
 	}, [workSwitchWABtn, workSwitchDJBtn])
 
 	return (
-		<main className="w-full flex flex-col p-8">
-			<div className="p-10 flex flex-col gap-2 items-center justify-center">
-				<h1 className="font-bold text-2xl">Works</h1>
+		<main className="w-full flex flex-col">
+			<div className="flex flex-col p-8">
+				<div className="p-10 flex flex-col gap-2 items-center justify-center">
+					<h1 className="font-bold text-2xl">Works</h1>
+				</div>
+				<ProjectList />
 			</div>
-			<ProjectList />
+			<Journey />
 		</main>
 	);
 }
