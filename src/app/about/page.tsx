@@ -67,8 +67,15 @@ function MiddleColumn() {
 		<div className="md:h-full md:overflow-y-auto grow-0 shrink-0 min-w-0 basis-1/3 md:border-r-2 md:border-black md:border-solid no-scrollbar">
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
+					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">About me</h2>
+					<p className="pb-2">I am a full stack web designer currently pursuing a diploma in data analytics. I wish to combine both data analytics and web design to create something functional and meaningful.</p>
+					<p>Based in Singapore, I have been developing since 2018.</p>
+				</div>
+			</section>
+			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
+				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">What I am fluent in</h2>
-					<p className="pb-2">Since young, I had a strong passion for developing things. It started off with game development on the Roblox engine, before deviating into Python to automate processes with scripts.</p>
+					<p className="pb-2">Since young, I had a strong passion for developing things. It started off with game development on the Roblox engine, before diving into Python to automate processes with scripts.</p>
 					<p>Now, I enjoy building web applications more than ever with exciting technologies, such as Next.js or React.</p>
 				</div>
 				<div className="inline-block w-full h-[132px] overflow-x-clip border-black border-solid border-b-2 border-t-2">
@@ -102,14 +109,14 @@ function MiddleColumn() {
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">From CRUD apps, to Data visualisations, to AI</h2>
-					<p className="pb-2">Moving from creating of CRUD programs and web applications with Python and Javascript respectively, I was exposed to data visualisations and journalism with the tools such as PowerBI Service and Tableau. The valuable experience taught me the core skillsets of being a data analyst - telling a story with the data.</p>
+					<p className="">Moving from creating of CRUD programs and web applications with Python and Javascript respectively, I was exposed to data visualisations and journalism with the tools such as PowerBI Service and Tableau. The valuable experience taught me the core skillsets of being a data analyst - telling a story with the data.</p>
 				</div>
 			</section>
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">Fun facts about me</h2>
 					<p className="pb-2">All IT things aside, I love to spend my money guilt-free on seafood, with my favourite go-to being crabs and fish dishes.</p>
-					<p className="pb-2 italic">&lt;insert-picture-of-black-pepper-crab-here&gt; 🌶️🌶️</p>
+					<p className="italic">&lt;insert-picture-of-black-pepper-crab-here&gt; 🌶️🌶️</p>
 					<p>Otherwise, I </p>
 				</div>
 			</section>
