@@ -89,9 +89,11 @@ a.link {
   }
 }
 
-@layer screen(md) {
-  .text-stroke-bg {
-    --text-stroke-width: 8px;
+@keyframes namebannerlr {
+  from {
+    transform: translateX(0);
+  } to {
+    transform: translateX(var(--namebanneroffset));
   }
 }
 
