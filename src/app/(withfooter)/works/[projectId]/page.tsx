@@ -8,7 +8,7 @@ import { ProjectData } from "@/app/data/projects"
 import { StaticImageData } from "next/image";
 import { notFound } from "next/navigation";
 
-function ProjectDetailBanner({ projectId, isActive }: { projectId: string, isActive: boolean }) {
+function ProjectDetailBanner({ projectId }: { projectId: string }) {
   return (
     <div className="w-full flex justify-between p-4 gap-4 border-solid border-black border-b-2">
       <div className="">
