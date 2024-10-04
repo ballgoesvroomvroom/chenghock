@@ -3,6 +3,9 @@ import { StaticImageData } from "next/image"
 import demoImg from "@/public/works/asset_01.png"
 import demoImg2 from "@/public/works/asset_02.png"
 
+import bbai_logo from "@/public/works/bbai_logo.png"
+import bbai_thumb from "@/public/works/bbai_thumb.png"
+
 export interface ProjectDataType {
 	[index: string]: {
 		title: string,
@@ -89,6 +92,23 @@ export const ProjectData: ProjectDataType = {
 			["Early Prototypes", "This project has been long overdue as I was juggling my personal responsibilities (school and work commitments), leaving me with limited spare time to work on it. As a full-fledged web application now, packed with all the nice-to-have features, it has came a long way.", "Earyl designs for the worksheets"]
 		]
 	},
+	"brainbloomai": {
+		"title": "BrainBloomAI",
+		"created_on": "September 2024",
+		"type": 0,
+		"status": "Production",
+		"ext_link_demo": "https://github.com/BrainBloomAI",
+		"logo": bbai_logo,
+		"coverImg": bbai_thumb,
+		"description": [
+			["About", "BrainBloomAI is a web app designed to help Persons with Intellectual Disabilities (PWIDs) learn proper social etiquette in a safe and fun environment. The app simulates conversational scenarios between the AI and PWIDs, focusing on predefined roles and situations within an employment context. This approach allows users to engage in realistic dialogues, helping them improve their social skills. To keep users engaged, PWIDs can accumulate points after each game, which can be exchanged for badges. The app is endorsed by MINDS (Movement for the Intellectually Disabled of Singapore), where mentors can recommend BrainBloomAI to PWIDs who are struggling socially. The end goal is to empower PWIDs to seamlessly integrate into various social situations with confidence."],
+			["Choice of Tech Stack", "The backend of BrainBloomAI was developed using Express.js, which acts as a wrapper over Nvidia's NIM LLM via its API. This provided the language processing capabilities required for dynamic conversational scenarios. On the frontend, Next.js was used to stream audio data to and from Deepgram, a service that handles text-to-speech (TTS) and speech-to-text (SST), allowing real-time interaction. This tech stack was chosen to ensure responsiveness, scalability, and real-time feedback—key components for the app’s success."],
+			["Early Prototypes", "Early prototypes of BrainBloomAI were crucial for conducting user testing with PWIDs. The initial feedback showed that the interface was difficult to navigate, leading to a significant change where only one call-to-action element is displayed at any time, simplifying the user experience. Additionally, the game’s difficulty level was adjusted after testers found the spoken playback too challenging; the TTS speed was reduced to make the experience more accessible and enjoyable."],
+			["Challenges", "One of the significant challenges in developing BrainBloomAI was the time crunch, as the team was split across different locations, with two members overseas. Coordinating progress under tight deadlines proved difficult. Additionally, this was the first time the team had developed an app specifically for PWIDs, and ensuring the app was both accessible and functional introduced many new challenges."],
+			["How I Overcame Those Challenges", "To tackle the time crunch, the team efficiently split the workload into frontend and backend development. Proactive communication ensured that both systems were developed in parallel, allowing for timely completion. As for optimizing the app for PWIDs, we followed accessibility best practices and conducted multiple iterations of user testing to fine-tune the interface and experience, balancing functionality with usability for our target audience."],
+			["My Learning Takeaways", "Building BrainBloomAI provided valuable insights into optimizing web applications for PWIDs without compromising on functionality. I also gained experience in streaming audio data between the client and server, an essential feature of the app. Finally, working with a remote team for the first time taught me the importance of clear and concise communication, particularly when coordinating tasks across different time zones."]
+		]
+	},
 	"spots": {
 		"title": "Spots",
 		"created_on": "September 2024",
@@ -134,6 +154,6 @@ export const ProjectData: ProjectDataType = {
 }
 
 export const ProjectDataOrder: Array<Array<string>> = [
-	["qriller", "qriller", "qriller", "spots"],
+	["qriller", "brainbloomai", "qriller", "spots"],
 	["study"]
 ]
