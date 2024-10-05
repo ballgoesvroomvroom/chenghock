@@ -12,7 +12,7 @@ export function Footer() {
       <div className="grow">
         <p className="font-bold text-xl pb-2">Pages</p>
         <nav className="flex flex-row gap-2">
-          <a href="/about" className="hocus:font-bold">About</a>
+          <a href="/" className="hocus:font-bold">About</a>
           <a href="/works" className="hocus:font-bold">Works</a>
           <a href="/contact" className="hocus:font-bold">Contact</a>
         </nav>
