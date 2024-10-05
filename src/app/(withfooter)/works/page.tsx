@@ -200,13 +200,13 @@ function ProjectList() {
 
 function Journey() {
 	return (
-		<div className="flex flex-row justify-center items-center p-4 -mt-32 box-content min-h-svh bg-black-accent text-white">
-			<div className="max-w-[800px] flex flex-row gap-4">
+		<div className="flex flex-row justify-center items-center p-8 -mt-12 md:-mt-32 box-content min-h-svh bg-black-accent text-white">
+			<div className="max-w-[800px] flex flex-col md:flex-row gap-4">
 				<div className="flex flex-col">
-					<h1 className="font-bold text-9xl whitespace-nowrap">6 Years</h1>
+					<h1 className="font-bold text-5xl md:text-9xl whitespace-nowrap">6 Years</h1>
 					<p className="text-2xl">of creating experiences</p>
 				</div>
-				<div className="mr-12 border-white border-dotted border-0 border-r-[8px] origin-top transition-transform" style={{
+				<div className="md:mr-12 border-white border-dotted border-0 border-r-[8px] origin-top transition-transform" style={{
 					animationName: "heightscale",
 					animationDuration: "2s",
 					animationDirection: "alternate",
@@ -255,11 +255,14 @@ export default function Home() {
 
 	return (
 		<main className="w-full flex flex-col">
-			<div className="flex flex-col p-8">
-				<div className="p-10 flex flex-col gap-2 items-center justify-center">
-					<h1 className="font-bold text-2xl">Works</h1>
+			<div className="relative flex flex-col p-4 md:p-8">
+				<div className="p-4 md:p-10 flex flex-col gap-2 items-center justify-center">
+					<h1 className="font-bold text-3xl md:text-7xl">My Works</h1>
 				</div>
 				<ProjectList />
+				<div className="absolute top-full left-0 -mt-16 md:-mt-36 origin-top-left -rotate-90 opacity-50">
+					<p className="text-4xl md:text-9xl font-bold text-black-accent">Works</p>
+				</div>
 			</div>
 			<Journey />
 		</main>
