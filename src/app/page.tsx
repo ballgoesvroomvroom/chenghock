@@ -109,15 +109,17 @@ function MiddleColumn() {
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">From CRUD apps, to Data visualisations, to AI</h2>
-					<p className="">Moving from creating of CRUD programs and web applications with Python and Javascript respectively, I was exposed to data visualisations and journalism with the tools such as PowerBI Service and Tableau. The valuable experience taught me the core skillsets of being a data analyst - telling a story with the data.</p>
+					<p className="pb-2">Starting with Python-based CRUD CLI programs, I learned the fundamentals of app development before moving on to building CRUD web apps using JavaScript and various frameworks.</p>
+					<p className="pb-2">My interest in AI grew, leading me to explore its applications in data analytics, which shaped my choice of diploma.</p>
+					<p>I’ve since worked with techniques like forecasting, clustering, and neural networks; I’m eager to build the next generation of AI-powered web applications.</p>
 				</div>
 			</section>
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">Fun facts about me</h2>
-					<p className="pb-2">All IT things aside, I love to spend my money guilt-free on seafood, with my favourite go-to being crabs and fish dishes.</p>
-					<p className="italic">&lt;insert-picture-of-black-pepper-crab-here&gt; 🌶️🌶️</p>
-					<p>Otherwise, I </p>
+					<p className="pb-2">Aside from learning and experimenting all day, I love to feast on seafood, with anything involving crabs and fish as my favourite dishes.</p>
+					<p className="pb-4 italic">&lt;insert-picture-of-black-pepper-crab-here&gt; 🌶️🌶️</p>
+					<p>Otherwise, I also love to plot time for exercises, especially late night jogs 🏃‍♂️</p>
 				</div>
 			</section>
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
