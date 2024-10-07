@@ -160,9 +160,7 @@ function RightColumn() {
 											<p className="text-slate-800">{ProjectData[projectId].type === 0 ? "Full stack web application" : "Data journalism"}</p>
 										</div>
 										<div className="self-end">
-											<button className="bg-black-accent rounded p-2 text-white">
-												<span>Details</span>
-											</button>
+											<a className="bg-black-accent rounded p-2 text-white" href={`/works/${projectId}`}>Details</a>
 										</div>
 									</div>
 								</div>
