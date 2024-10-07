@@ -14,7 +14,7 @@ function ProjectDetailBanner({ projectId }: { projectId: string }) {
 					<path d="m10.396 8.3955 1.6035 1.6035-6 6.002 6 6.002-1.6035 1.6035-7.6035-7.6055z" fill="currentColor"/>
 					<path d="m5 14.865v2.2695h25v-2.2695z"
 						fill="currentColor"
-						fill-rule="evenodd"
+						fillRule="evenodd"
 						style={{paintOrder: "markers stroke fill"}}
 						className="transition-transform scale-x-75 group-hover:scale-x-100 origin-left"
 					/>
