@@ -104,20 +104,24 @@ function ProjectShowcaseSlideshow({ projectId }: { projectId: string }) {
 					)
 				}
 			</div>
-			<div className="absolute bottom-0 left-0 w-full h p-4 flex justify-center items-end">
-				<div className="relative flex gap-2">
-					{
-						ProjectData[projectId].supplImg && [...Array(ProjectData[projectId].supplImg.length +1)].map((_, i) => 
-							<div key={i} className="w-2 h-2 rounded-full bg-[rgba(150,150,150,.4)]"></div>
-						)
-					}
-					<div className="absolute top-0 left-0 w-2 h-2 rounded-full transition-transform" style={{
-						backgroundColor: ProjectData[projectId].accentColor,
-						transform: `translateX(${carouselIdx *16}px)`,
-					}}>
+			{
+				ProjectData[projectId].supplImg && (
+					<div className="absolute bottom-0 left-0 w-full h p-4 flex justify-center items-end">
+						<div className="relative flex gap-2">
+							{
+								[...Array(ProjectData[projectId].supplImg.length +1)].map((_, i) => 
+									<div key={i} className="w-2 h-2 rounded-full bg-[rgba(150,150,150,.4)]"></div>
+								)
+							}
+							<div className="absolute top-0 left-0 w-2 h-2 rounded-full transition-transform" style={{
+								backgroundColor: ProjectData[projectId].accentColor,
+								transform: `translateX(${carouselIdx *16}px)`,
+							}}>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
+				)
+			}
 		</div>
 	)
 }
