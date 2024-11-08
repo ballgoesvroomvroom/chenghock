@@ -14,8 +14,8 @@ function LeftColumn() {
 		<div className="flex flex-col basis-[var(--ht)] md:basis-1/3 h-full grow md:shrink-0 md:border-r-2 md:border-black md:border-solid">
 			<div className="p-6">
 				<h1 className="font-bold text-5xl pb-4">I am a student</h1>
-				<p className="text-xl pb-2">Passionate in <span className="font-bold">full-stack web app development</span></p>
-				<p className="text-xl">Diploma in Applied AI & Analytics @ Nanyang Polytechnic</p>
+				<p className="text-xl pb-2">Passionate in <span className="font-bold">full-stack web app development</span>.</p>
+				<p className="text-xl">Diploma in Applied AI & Analytics @ Nanyang Polytechnic.</p>
 			</div>
 			<div className="grow shrink border-black border-solid border-t-2 border-b-2 min-h-0">
 				<img className="w-full h-full object-cover" src={headshot.src} />
@@ -69,8 +69,8 @@ function MiddleColumn() {
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">About me</h2>
-					<p className="pb-2">I am a full stack web designer currently pursuing a diploma in data analytics. I wish to combine both data analytics and web design to create something functional and meaningful.</p>
-					<p>Based in Singapore, I have been developing since 2018.</p>
+					<p className="pb-2">I am a full stack web developer currently pursuing a diploma in data analytics. I wish to combine both data analytics and web design to create something functional and meaningful.</p>
+					<p>Based in Singapore, I have been developing and tinkering since 2018.</p>
 				</div>
 			</section>
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
