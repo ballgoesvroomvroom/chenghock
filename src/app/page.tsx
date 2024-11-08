@@ -14,7 +14,7 @@ function LeftColumn() {
 		<div className="flex flex-col basis-[var(--ht)] md:basis-1/3 h-full grow md:shrink-0 md:border-r-2 md:border-black md:border-solid">
 			<div className="p-6">
 				<h1 className="font-bold text-5xl pb-4">I am a student</h1>
-				<p className="text-xl pb-2">Passionate in <span className="font-bold">full-stack web app development</span>.</p>
+				<p className="text-xl pb-2">Passionate in <span className="font-bold">full stack web app development</span>.</p>
 				<p className="text-xl">Diploma in Applied AI & Analytics @ Nanyang Polytechnic.</p>
 			</div>
 			<div className="grow shrink border-black border-solid border-t-2 border-b-2 min-h-0">
@@ -69,7 +69,7 @@ function MiddleColumn() {
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">About me</h2>
-					<p className="pb-2">I am a full stack web developer currently pursuing a diploma in data analytics. I wish to combine both data analytics and web design to create something functional and meaningful.</p>
+					<p className="pb-2">I am a <span className="font-bold">full stack web developer</span> currently pursuing a diploma in data analytics. I wish to combine both data analytics and web design to create something functional and meaningful.</p>
 					<p>Based in Singapore, I have been developing and tinkering since 2018.</p>
 				</div>
 			</section>
@@ -77,7 +77,7 @@ function MiddleColumn() {
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">What I am fluent in</h2>
 					<p className="pb-2">Since young, I had a strong passion for developing things. It started off with game development on the Roblox engine, before diving into Python to automate processes with scripts.</p>
-					<p>Now, I enjoy building full-stack web applications more than ever with exciting technologies, such as Next.js and React.</p>
+					<p>Now, I enjoy building <span className="font-bold">full stack web applications</span> more than ever with exciting technologies, such as Next.js, React and Typescript!</p>
 				</div>
 				<div className="inline-block w-full h-[132px] overflow-x-clip border-black border-solid border-b-2 border-t-2">
 					<div id="set" className="relative inline-block whitespace-nowrap scroll-lr h-full">
@@ -110,15 +110,24 @@ function MiddleColumn() {
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">From CRUD apps, to Data visualisations, to AI</h2>
-					<p className="pb-2">Starting with Python-based CRUD CLI programs, I learned the fundamentals of app development before moving on to building CRUD web apps using JavaScript and various frameworks.</p>
-					<p className="pb-2">My interest in AI grew, leading me to explore its applications in data analytics, which shaped my choice of diploma.</p>
-					<p>I’ve since worked with techniques like forecasting, clustering, and neural networks; I’m eager to build the next generation of AI-powered web applications.</p>
+					<p className="pb-2">Starting with Python-based CRUD CLI programs, I learned the fundamentals of app development before moving on to building <span className="font-bold">CRUD web apps using vanilla JavaScript and various frameworks</span>.</p>
+					<p className="pb-2">My interest in AI grew, leading me to explore its <span className="font-bold">applications in data analytics</span>, which shaped my choice of diploma.</p>
+					<p>I’ve since worked with techniques like forecasting, clustering, and neural networks; I’m eager to build the next generation of <span className="font-bold">AI-powered web applications</span>.</p>
+				</div>
+			</section>
+			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
+				<div className="p-4">
+					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">Multilingual</h2>
+					<p className="pb-2">I find the syntax of the many different programming languages to be quite a beautiful thing to appreciate.</p>
+					<p className="pb-2">I am fluent in <span className="font-bold">Javascript</span>, <span className="font-bold">Typescript</span>, <span className="font-bold">Python</span>, and <span className="font-bold">Lua</span>. Mostly working with frameworks to develop <span className="font-bold">full stack web applications</span>.</p>
+					<p className="pb-2">I have explored various other languages such as Java (for Hadoop), Kotlin (Android development), Rust and C++ for software development.</p>
+					<p className="">In the near future, I would love to expand my language capabilities to build all sorts of things!</p>
 				</div>
 			</section>
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">Fun facts about me</h2>
-					<p className="pb-2">Aside from learning and experimenting all day, I love to feast on seafood, with anything involving crabs and fish as my favourite dishes.</p>
+					<p className="pb-2">Aside from learning and debugging all day, I love to feast on seafood, with anything involving crabs and fish as my favourite dishes.</p>
 					<p className="pb-4 italic">&lt;insert-picture-of-black-pepper-crab-here&gt; 🌶️🌶️</p>
 					<p>Otherwise, I also love to plot time for exercises, especially late night jogs 🏃‍♂️</p>
 				</div>
@@ -134,8 +143,8 @@ function MiddleColumn() {
 			<section className="hidden md:block overflow-x-auto min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">View my works</h2>
-					<p className="pb-2">On the right panel, view some of my proudest projects that saw its completion.</p>
-					<p className="inline-flex items-center gap-4">View more in details here <button className="p-2 flex justify-between items-center bg-black-accent text-white rounded"><span>My works</span></button></p>
+					<p className="pb-2">On the right panel, view some of my <span className="font-bold italic">*proudest projects*</span> that saw its completion.</p>
+					<p className="inline-flex items-center gap-4">View more details here <a href="/works" className="p-2 flex justify-between items-center bg-black-accent text-white rounded">My works</a></p>
 				</div>
 			</section>
 		</div>
@@ -153,7 +162,7 @@ function RightColumn() {
 					ProjectDataOrder.map((projectIds, i) => {
 						return projectIds.map((projectId, j) => {
 							return (
-								<div className="border-solid border-black border-t-2">
+								<div key={`${i}-${j}`} className="border-solid border-black border-t-2">
 									<img src={ProjectData[projectId].coverImg.src} />
 									<div className="flex flex-row justify-between p-4 border-solid border-black border-t">
 										<div>
@@ -184,7 +193,6 @@ export default function AboutMePage() {
 
 		const windowResizeUpdateFn = () => {
 			let mq = window.matchMedia("(min-width: 768px)")
-			console.log(mq.matches)
 			if (mq.matches) {
 				setForceTopbarScrollState(true) // force .scrolled state on topbar for this page (for non-mobile users)
 			} else {
