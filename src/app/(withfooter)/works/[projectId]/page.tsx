@@ -22,7 +22,7 @@ function ProjectDetailBanner({ projectId }: { projectId: string }) {
 				Back
 			</a>
 			<div className="flex items-center gap-3">
-				<img className="w-full w-12 md:w-16 aspect-square min-w-0 border border-black" src={ProjectData[projectId].logo.src} />
+				<img className={`w-full w-12 md:w-16 aspect-square min-w-0 ${ProjectData[projectId].logo.border ? "border border-black" : ""}`} src={ProjectData[projectId].logo.src} />
 				<div className="flex flex-col">
 					<h1 className="font-bold text-4xl">{ProjectData[projectId].title}</h1>
 					<p>{ProjectData[projectId].synopsis}</p>

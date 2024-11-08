@@ -18,6 +18,8 @@ interface HTMLCardElement extends HTMLButtonElement {
 
 const CARD_HOVER_GROWTH = 3 // 3% extra from restCardWidth (width for cards at rest)
 function ProjectList() {
+	let SharedProjectDataOrder = ProjectDataOrder[0].concat(ProjectDataOrder[1])
+
 	let [activeIdx, setActiveIdx] = useState(0)
 
 	const [cardWidth, setCardWidth] = useState(0)
@@ -25,7 +27,7 @@ function ProjectList() {
 	const [hoverCardIdx, setHoverCardIdx] = useState<number|null>(null)
 
 	const [mainCardWidth, setMainCardWidth] = useState(80) // 90% of space
-	const [expandedCardWidth, setExpandedCardWidth] = useState((100 -mainCardWidth -CARD_HOVER_GROWTH) /(ProjectDataOrder[0].length -1) +CARD_HOVER_GROWTH) // remaining space + a bit more
+	const [expandedCardWidth, setExpandedCardWidth] = useState((100 -mainCardWidth -CARD_HOVER_GROWTH) /(SharedProjectDataOrder.length -1) +CARD_HOVER_GROWTH) // remaining space + a bit more
 	const [restCardWidth, setRestCardWidth] = useState((100 -mainCardWidth -(hoverCardIdx == null ? 0 : CARD_HOVER_GROWTH)) /(ProjectDataOrder[0].length -1)) // remaining spce
 
 	const containerRef = useRef<HTMLDivElement>(null)
@@ -122,7 +124,7 @@ function ProjectList() {
 	}, [])
 
 	useEffect(() => {
-		setRestCardWidth((100 -mainCardWidth -(hoverCardIdx == null ? 0 : CARD_HOVER_GROWTH)) /(ProjectDataOrder[0].length -1))
+		setRestCardWidth((100 -mainCardWidth -(hoverCardIdx == null ? 0 : CARD_HOVER_GROWTH)) /(SharedProjectDataOrder.length -1))
 	}, [hoverCardIdx])
 
 
@@ -130,7 +132,7 @@ function ProjectList() {
 		<div className="relative w-full md:px-32">
 			<div ref={containerRef} className="w-full">
 			{
-				ProjectDataOrder[0].map((projectId, i) => 
+				ProjectDataOrder[0].concat(ProjectDataOrder[1]).map((projectId, i) => 
 					<button key={i} ref={el => {cardsRef.current[i] = el}}
 						className={
 							`workcard group relative h-full ${activeIdx === i ? "active" : ""} overflow-clip float-left block transition-all cursor-pointer`
@@ -139,7 +141,7 @@ function ProjectList() {
 							width: "100%",
 							height: cardHeight,
 							maxWidth: `${activeIdx === i ? mainCardWidth : (hoverCardIdx === i ? expandedCardWidth : restCardWidth)}%`,
-							zIndex: ProjectDataOrder[0].length -i
+							zIndex: SharedProjectDataOrder.length -i
 						}}
 					>
 						<div className="absolute top-0 right-0 p-4 flex flex-col justify-between h-full font-bold text-xl text-white" style={{

@@ -1,10 +1,13 @@
 import { StaticImageData } from "next/image"
 
-import demoImg from "@/public/works/asset_01.png"
-import demoImg2 from "@/public/works/asset_02.png"
+import qriller_logo from "@/public/works/asset_02.png"
+import qriller_thumb from "@/public/works/asset_01.png"
 
 import bbai_logo from "@/public/works/bbai_logo.png"
 import bbai_thumb from "@/public/works/bbai_thumb.png"
+
+import gp_logo from "@/public/works/asset_04.png"
+import gp_thumb from "@/public/works/asset_03.png"
 
 export interface ProjectDataType {
 	[index: string]: {
@@ -13,67 +16,28 @@ export interface ProjectDataType {
 		type: 0|1,
 		status: string,
 		synopsis: string,
-		logo: StaticImageData,
+		logo: {
+			border: boolean,
+			src: StaticImageData["src"]
+		},
 		coverImg: StaticImageData,
 		description: Array<Array<string>>,
 		ext_link_demo?: string
 	}
 }
 
-export const StackData = {
-	"express": {
-		"name": "Express.js"
-	}
-}
-
-
-const dummy = {
-		"title": "Qriller",
-		"created_on": "April 2023",
-		"type": 0 as 0|1,
-		"status": "Refining",
-		"ext_link_demo": "https://qriller.com",
-		"logo": demoImg2,
-		"coverImg": demoImg,
-		"technicals": {
-			"stack": "Express.js, Firestore, Next.js",
-			"deployment": "Bundled with Webpack, served on Ubuntu Droplet with PM2",
-			"3rdpartydep": "Google, Stripe, GSAP"
-		},
-		"synopsis": "Full stack web application for the generation and transacting of Math worksheets.",
-		"learning_points": [
-			"Use of Webpack to bundle modules and dependencies",
-			"Implementing payment services through the use of Stripe as a payment processor and Google Pay as a payment gateway"
-		],
-		"description": [
-			["About", "Qriller is a business centered around procedural worksheets. It transacts digital worksheets, alongside its answer sheet, built for students, tutors and teachers.", "Building the interface for Qriller was a stressful albeit meaningful experience. I had learn a lot since the first day of making the website become reality."],
-			["Choice of Technology Stack", "As I had done prior full stack web applications (no longer maintained) with Express.js and Firebase’s NoSQL database - Firestore, it was the tech stack I was most comfortable with.", "I wanted to ship this product out as soon as possible. Consequently, I decided to simply go with vanilla HTML and JS as it was what I was familiar with at that point in time."],
-			["Early Prototypes", "This project has been long overdue as I was juggling my personal responsibilities (school and work commitments), leaving me with limited spare time to work on it. As a full-fledged web application now, packed with all the nice-to-have features, it has came a long way.", "Earyl designs for the worksheets"]
-		]
-	}
-
 export const ProjectData: ProjectDataType = {
-	// "brainbloom": {
-	// 	"title": "BrainBloomAI",
-	// 	"created_on": "September 2024",
-	// 	"type": 0,
-	// 	"status": "Production",
-	// 	"ext_link_demo": "https://brainbloom.ai",
-	// 	"logo": demoImg,
-	// 	"coverImg": demoImg,
-	// 	"technicals": {
-	// 		"stack": ["nextjs", "react", "tailwindcss"]
-	// 	},
-	// 	"synopsis": ""
-	// }
 	"qriller": {
 		"title": "Qriller",
 		"created_on": "April 2023",
 		"type": 0,
 		"status": "Refining",
 		"ext_link_demo": "https://qriller.com",
-		"logo": demoImg2,
-		"coverImg": demoImg,
+		"logo": {
+			border: false,
+			src: qriller_logo.src
+		},
+		"coverImg": qriller_thumb,
 		"synopsis": "Full stack web application for the generation and transacting of Math worksheets.",
 		"description": [
 			["About", "Qriller is a web application designed for tutors seeking high-quality teaching materials, allowing them to focus on what they do best—teaching. The platform addresses the critical issue of the lack of accessible and affordable teaching and studying materials. Specifically tailored for GCSE O/N-Levels, Qriller offers a diverse range of procedural worksheets sampled from reputable sources, such as math textbooks and past school exam papers. Tutors can selectively export questions to create customized worksheets, complete with labeled difficulty levels, ensuring that they meet the specific needs of their students. The web app is accessible on various devices, including phones, laptops, and tablets, enabling tutors to work flexibly. Additionally, worksheets can be exported as PDFs for easy printing, and various customization options mimic the appearance of traditional hardcopy worksheets used in schools."],
@@ -93,7 +57,10 @@ export const ProjectData: ProjectDataType = {
 		"type": 0,
 		"status": "Production",
 		"ext_link_demo": "https://github.com/BrainBloomAI",
-		"logo": bbai_logo,
+		"logo": {
+			border: true,
+			src: bbai_logo.src
+		},
 		"coverImg": bbai_thumb,
 		"synopsis": "A web app that gamifies learning process for PWIDs",
 		"description": [
@@ -105,33 +72,39 @@ export const ProjectData: ProjectDataType = {
 			["My Learning Takeaways", "Building BrainBloomAI provided valuable insights into optimizing web applications for PWIDs without compromising on functionality. I also gained experience in streaming audio data between the client and server, an essential feature of the app. Finally, working with a remote team for the first time taught me the importance of clear and concise communication, particularly when coordinating tasks across different time zones."]
 		]
 	},
-	"spots": {
-		"title": "Spots",
-		"created_on": "September 2024",
-		"type": 0,
-		"status": "Deployed",
-		"synopsis": "abc",
-		"logo": demoImg2,
-		"coverImg": demoImg,
-		"description": [
-			["About", "Initially started as an interface for the song recommendation I was interested in doing, however the execution of the recommendation did not come into fruition as there was a lack of user data for a hybrid or collaborative filtering approach."]
-		]
-	},
+	// "spots": {
+	// 	"title": "Spots",
+	// 	"created_on": "September 2024",
+	// 	"type": 0,
+	// 	"status": "Deployed",
+	// 	"synopsis": "abc",
+	// 	"logo": demoImg2,
+	// 	"coverImg": demoImg,
+	// 	"description": [
+	// 		["About", "Initially started as an interface for the song recommendation I was interested in doing, however the execution of the recommendation did not come into fruition as there was a lack of user data for a hybrid or collaborative filtering approach."]
+	// 	]
+	// },
 	"study": {
 		"title": "Singapore Food Resilience Study",
 		"created_on": "December 2023",
 		"type": 1,
 		"status": "Deployed",
-		"logo": demoImg2,
-		"coverImg": demoImg,
-		"synopsis": "A project centered around PowerBI Service for the heavy lifting of data preparation, understanding and visualizations.",
+		"logo": {
+			border: false,
+			src: gp_logo.src,
+		},
+		"coverImg": gp_thumb,
+		"synopsis": "A group project centered around PowerBI Service for the heavy lifting of data preparation, understanding and visualizations.",
 		"description": [
-			["About", "Initially started as an interface for the song recommendation I was interested in doing, however the execution of the recommendation did not come into fruition as there was a lack of user data for a hybrid or collaborative filtering approach."]
+			["About", "The end product of this project was a PowerBI dashboard featuring the key metrics used to track local food production in Singapore. Various indicators were employed to track food security. Namely, agriculture orientation index (AOI), local food production (tonnes), farm count, food wastage, and food import weight."],
+			["Challenges", "Singapore has no prevelent issue of food insecurity amongst its population. This led to data scarcity on direct food security metrics."],
+			["How I Overcame Those Challenges", "Indirect indicators were used as a proxy mean to measure food security. Such as share of food consumption in Singapore that is imported.", "Food security means ensuring availability of sufficient and nutritious food at all times. This meant that local food production also played a key role."],
+			["Work in progress", "I am still documenting this project, please check again later!", "Alternatively, I am readily contactable at hi@chenghock.com :)"]
 		]
 	}
 }
 
 export const ProjectDataOrder: Array<Array<string>> = [
-	["qriller", "brainbloomai", "qriller", "spots"],
+	["qriller", "brainbloomai"],
 	["study"]
 ]
