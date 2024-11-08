@@ -38,7 +38,7 @@ function ProjectShowcaseSlideshow({ projectId }: { projectId: string }) {
 	const carouselNextRef = useRef(carouselIdx +1)
 
 	let ignoreScroll = useRef(false)
-	let lastInteracted = 0
+	let lastInteracted = useRef(0)
 
 	const scroll = (e: React.WheelEvent<HTMLDivElement>) => {
 		if (!carouselRef.current || !ProjectData[projectId].supplImg || ignoreScroll.current) {
@@ -48,7 +48,7 @@ function ProjectShowcaseSlideshow({ projectId }: { projectId: string }) {
 		let rect = carouselRef.current.getBoundingClientRect()
 		let newIdx = Math.floor(carouselRef.current.scrollLeft /rect.width)
 		if (newIdx !== carouselIdx) {
-			lastInteracted = +new Date();
+			lastInteracted.current = +new Date();
 			setCarouselIdx(newIdx)
 			// carouselNextRef.current = (newIdx +1) %(ProjectData[projectId].supplImg.length +1)
 		}
@@ -74,7 +74,7 @@ function ProjectShowcaseSlideshow({ projectId }: { projectId: string }) {
 			}
 
 			let intervalId = setInterval(() => {
-				if (!carouselRef.current || !ProjectData[projectId].supplImg || +new Date() -lastInteracted <= 2000) {
+				if (!carouselRef.current || !ProjectData[projectId].supplImg || +new Date() -lastInteracted.current <= 2000) {
 					// give 2s of no user interactivity before auto scrolling
 					return
 				}
