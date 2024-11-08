@@ -149,7 +149,7 @@ function ProjectList() {
 							zIndex: 3,
 						}}>
 							<div className="text-right">{i +1}</div>
-							<p className="group-[:not(.active):hover]:block hidden z-10 text-accent">{ProjectData[projectId].title}</p>
+							<p className="group-[:not(.active):hover]:block hidden z-10 text-accent text-right">{ProjectData[projectId].title}</p>
 						</div>
 						<div className="absolute top-0 right-0 flex flex-col items-center justify-end" style={{
 							width: cardWidth,
