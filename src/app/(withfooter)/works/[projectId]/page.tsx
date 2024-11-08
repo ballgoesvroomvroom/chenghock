@@ -3,7 +3,7 @@
 import { TopbarContext } from "@/app/components/topbar/topbar";
 import { ProjectData } from "@/app/data/projects"
 
-import { useContext, useEffect, useRef, Fragment, useState } from "react";
+import { useContext, useEffect, useRef, Fragment, useState, MouseEventHandler, WheelEventHandler } from "react";
 import { notFound } from "next/navigation";
 
 function ProjectDetailBanner({ projectId }: { projectId: string }) {
@@ -26,6 +26,96 @@ function ProjectDetailBanner({ projectId }: { projectId: string }) {
 				<div className="flex flex-col">
 					<h1 className="font-bold text-4xl">{ProjectData[projectId].title}</h1>
 					<p>{ProjectData[projectId].synopsis}</p>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+function ProjectShowcaseSlideshow({ projectId }: { projectId: string }) {
+	const carouselRef = useRef<HTMLDivElement>(null)
+	const [carouselIdx, setCarouselIdx] = useState(0)
+	const carouselNextRef = useRef(carouselIdx +1)
+
+	let ignoreScroll = useRef(false)
+	let lastInteracted = 0
+
+	const scroll = (e: React.WheelEvent<HTMLDivElement>) => {
+		if (!carouselRef.current || !ProjectData[projectId].supplImg || ignoreScroll.current) {
+			return
+		}
+		
+		let rect = carouselRef.current.getBoundingClientRect()
+		let newIdx = Math.floor(carouselRef.current.scrollLeft /rect.width)
+		if (newIdx !== carouselIdx) {
+			lastInteracted = +new Date();
+			setCarouselIdx(newIdx)
+			// carouselNextRef.current = (newIdx +1) %(ProjectData[projectId].supplImg.length +1)
+		}
+	}
+
+	if (ProjectData[projectId].supplImg) {
+		useEffect(() => {
+			if (!carouselRef.current || !ProjectData[projectId].supplImg) {
+				return
+			}
+
+			// scroll to content
+			let rect = carouselRef.current.getBoundingClientRect()
+			carouselRef.current.scrollLeft = carouselIdx *rect.width
+
+			// set next target
+			carouselNextRef.current = (carouselIdx +1) %(ProjectData[projectId].supplImg.length +1)
+		}, [carouselIdx])
+
+		useEffect(() => {
+			if (!carouselRef.current || !ProjectData[projectId].supplImg) {
+				return
+			}
+
+			let intervalId = setInterval(() => {
+				if (!carouselRef.current || !ProjectData[projectId].supplImg || +new Date() -lastInteracted <= 2000) {
+					// give 2s of no user interactivity before auto scrolling
+					return
+				}
+
+				ignoreScroll.current = true
+				setCarouselIdx(carouselNextRef.current)
+				setTimeout(() => ignoreScroll.current = false, 1000)
+			}, 5000)
+
+			return () => {
+				clearInterval(intervalId)
+			}
+		}, [carouselRef])
+	}
+
+	return (
+		<div className="relative">
+			<div
+				className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"
+				onScroll={scroll}
+				ref={carouselRef}
+			>
+				<img className="snap-start" src={ProjectData[projectId].coverImg.src} />
+				{
+					ProjectData[projectId].supplImg && ProjectData[projectId].supplImg.map((img, i) => 
+						<img key={i} className="snap-start" src={img.src} />
+					)
+				}
+			</div>
+			<div className="absolute bottom-0 left-0 w-full h p-4 flex justify-center items-end">
+				<div className="relative flex gap-2">
+					{
+						ProjectData[projectId].supplImg && [...Array(ProjectData[projectId].supplImg.length +1)].map((_, i) => 
+							<div key={i} className="w-2 h-2 rounded-full bg-[rgba(150,150,150,.4)]"></div>
+						)
+					}
+					<div className="absolute top-0 left-0 w-2 h-2 rounded-full transition-transform" style={{
+						backgroundColor: ProjectData[projectId].accentColor,
+						transform: `translateX(${carouselIdx *16}px)`,
+					}}>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -71,12 +161,16 @@ function ProjectDetailContent({ projectId }: { projectId: string }) {
 						})
 					}
 				</nav>
-				<div className="flex flex-col gap-4">
-					<h2 className="font-bold text-2xl">External links</h2>
-					<a className="p-2 rounded text-black-accent hocus:text-white hocus:bg-black-accent border-black-accent border-solid border transition-colors" href={ProjectData[projectId].ext_link_demo} target="_blank">
-						<span>Visit site</span>
-					</a>
-				</div>
+				{
+					ProjectData[projectId].ext_link_demo && (
+						<div className="flex flex-col gap-4">
+							<h2 className="font-bold text-2xl">External links</h2>
+							<a className="p-2 rounded text-black-accent hocus:text-white hocus:bg-black-accent border-black-accent border-solid border transition-colors" href={ProjectData[projectId].ext_link_demo} target="_blank">
+								<span>Visit site</span>
+							</a>
+						</div>
+					)
+				}
 			</div>
 			<div className="overflow-auto scroll-smooth">
 				{
@@ -119,7 +213,7 @@ export default function DetailedProjectPage({ params }: { params: { projectId: s
 	return (
 		<main className="w-full flex flex-col items-center">
 			<ProjectDetailBanner projectId={projectId} />
-			<img src={ProjectData[projectId].coverImg.src} />
+			<ProjectShowcaseSlideshow projectId={projectId} />
 			<ProjectDetailContent projectId={projectId} />
 		</main>
 	);

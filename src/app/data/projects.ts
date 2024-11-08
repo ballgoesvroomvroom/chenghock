@@ -8,6 +8,8 @@ import bbai_thumb from "@/public/works/bbai_thumb.png"
 
 import gp_logo from "@/public/works/asset_04.png"
 import gp_thumb from "@/public/works/asset_03.png"
+import gp_suppl_1 from "@/public/works/asset_05.png"
+import gp_suppl_2 from "@/public/works/asset_06.png"
 
 export interface ProjectDataType {
 	[index: string]: {
@@ -21,8 +23,10 @@ export interface ProjectDataType {
 			src: StaticImageData["src"]
 		},
 		coverImg: StaticImageData,
+		supplImg?: StaticImageData[],
 		description: Array<Array<string>>,
-		ext_link_demo?: string
+		ext_link_demo?: string,
+		accentColor: string
 	}
 }
 
@@ -49,7 +53,8 @@ export const ProjectData: ProjectDataType = {
 			// ["About", "Qriller is a business centered around procedural worksheets. It transacts digital worksheets, alongside its answer sheet, built for students, tutors and teachers.", "Building the interface for Qriller was a stressful albeit meaningful experience. I had learn a lot since the first day of making the website become reality."],
 			// ["Choice of Technology Stack", "As I had done prior full stack web applications (no longer maintained) with Express.js and Firebase’s NoSQL database - Firestore, it was the tech stack I was most comfortable with.", "I wanted to ship this product out as soon as possible. Consequently, I decided to simply go with vanilla HTML and JS as it was what I was familiar with at that point in time."],
 			// ["Early Prototypes", "This project has been long overdue as I was juggling my personal responsibilities (school and work commitments), leaving me with limited spare time to work on it. As a full-fledged web application now, packed with all the nice-to-have features, it has came a long way.", "Earyl designs for the worksheets"]
-		]
+		],
+		"accentColor": "#d94444"
 	},
 	"brainbloomai": {
 		"title": "BrainBloomAI",
@@ -70,7 +75,8 @@ export const ProjectData: ProjectDataType = {
 			["Challenges", "One of the significant challenges in developing BrainBloomAI was the time crunch, as the team was split across different locations, with two members overseas. Coordinating progress under tight deadlines proved difficult. Additionally, this was the first time the team had developed an app specifically for PWIDs, and ensuring the app was both accessible and functional introduced many new challenges."],
 			["How I Overcame Those Challenges", "To tackle the time crunch, the team efficiently split the workload into frontend and backend development. Proactive communication ensured that both systems were developed in parallel, allowing for timely completion. As for optimizing the app for PWIDs, we followed accessibility best practices and conducted multiple iterations of user testing to fine-tune the interface and experience, balancing functionality with usability for our target audience."],
 			["My Learning Takeaways", "Building BrainBloomAI provided valuable insights into optimizing web applications for PWIDs without compromising on functionality. I also gained experience in streaming audio data between the client and server, an essential feature of the app. Finally, working with a remote team for the first time taught me the importance of clear and concise communication, particularly when coordinating tasks across different time zones."]
-		]
+		],
+		"accentColor": "#fff"
 	},
 	// "spots": {
 	// 	"title": "Spots",
@@ -94,6 +100,7 @@ export const ProjectData: ProjectDataType = {
 			src: gp_logo.src,
 		},
 		"coverImg": gp_thumb,
+		"supplImg": [gp_suppl_1, gp_suppl_2],
 		"synopsis": "A group project centered around PowerBI Service for the heavy lifting of data preparation, understanding and visualizations.",
 		"description": [
 			["About", "The end product of this group project was a PowerBI report featuring the key metrics used to track local food production in Singapore. Various indicators were employed to track food security. Namely, agriculture orientation index (AOI), local food production (tonnes), farm count, food wastage, and food import weight."],
@@ -101,7 +108,8 @@ export const ProjectData: ProjectDataType = {
 			["Challenges", "Singapore has no prevelent issue of food insecurity amongst its population. This led to data scarcity on direct food security metrics."],
 			["How I Overcame Those Challenges", "Indirect indicators were used as a proxy mean to measure food security. Such as share of food consumption in Singapore that is imported.", "Food security means ensuring availability of sufficient and nutritious food at all times. This meant that local food production also played a key role."],
 			["Work in progress", "I am still documenting this project, please check again later!", "Alternatively, I am readily contactable at hi@chenghock.com :)"]
-		]
+		],
+		"accentColor": "#019c80"
 	}
 }
 
