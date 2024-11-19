@@ -1,2 +1,4 @@
 # About
-Next.js web application serving my portfolio page on [fadedj.com](https://fadedj.com)
+Next.js web application serving my portfolio page on [chenghock.com](https://chenghock.com)
+
+Containing all my proudest works. :)
