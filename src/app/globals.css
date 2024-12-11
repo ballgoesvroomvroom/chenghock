@@ -81,14 +81,6 @@ a.link {
   transform: scaleX(1);
 }
 
-@keyframes lr {
-  from {
-    transform: translateX(0);
-  } to {
-    transform: translateX(-100%);
-  }
-}
-
 @keyframes namebannerlr {
   from {
     transform: translateX(0);
@@ -108,10 +100,5 @@ a.link {
   .no-scrollbar {
       -ms-overflow-style: none;  /* IE and Edge */
       scrollbar-width: none;  /* Firefox */
-  }
-
-  .scroll-lr {
-    transform-box: fill-box;
-    animation: lr 20s linear infinite;
   }
 }

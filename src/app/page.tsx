@@ -2,11 +2,12 @@
 
 import { SocialsContainer } from "@/app/components/socials"
 import { TopbarContext } from "@/app/components/topbar/topbar"
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import { ProjectData, ProjectDataOrder } from "@/app/data/projects";
-import { SKILLS_DATA } from "@/app/data/skills";
+import { TechStack as TechStackData, Group as TechStackGroup, GroupColor as TechStackGroupColor, TotalOrder as TechStackGroupOrder } from "@/app/data/techstack";
 
+import { MapPin } from "@phosphor-icons/react"
 import headshot from "@/public/graphics/headshot_square.jpg"
 
 function LeftColumn() {
@@ -14,7 +15,6 @@ function LeftColumn() {
 		<div className="flex flex-col basis-[var(--ht)] md:basis-1/3 h-full grow md:shrink-0 md:border-r-2 md:border-black md:border-solid">
 			<div className="p-6">
 				<h1 className="font-bold text-5xl pb-4">I am a student</h1>
-				<p className="text-xl pb-2">Passionate in <span className="font-bold">full stack web app development</span>.</p>
 				<p className="text-xl">Diploma in Applied AI & Analytics @ Nanyang Polytechnic.</p>
 			</div>
 			<div className="grow shrink border-black border-solid border-t-2 border-b-2 min-h-0">
@@ -22,6 +22,61 @@ function LeftColumn() {
 			</div>
 			<div className="flex flex-col w-full self-end p-4">
 				<SocialsContainer iconSize={54} />
+			</div>
+		</div>
+	)
+}
+
+function TechStack() {
+	const [currentIdx, setCurrentIdx] = useState<null | number>(0)
+	const currentToggledIdxRef = useRef<null | number>(0)
+
+	return (
+		<div className="flex flex-col gap-6">
+			<div className="-mt-2">
+				{
+					TechStackGroup.map((key, i) =>
+						<button key={i} className="px-2 rounded mr-2 mt-2 float-left transition-colors" style={{
+							backgroundColor: currentIdx === i ? TechStackGroupColor[i] : "#1a1a1a1a"
+						}} onClick={() => {
+							currentToggledIdxRef.current = i
+							setCurrentIdx(i)
+						}} onMouseEnter={() => {
+							setCurrentIdx(i)
+						}} onMouseLeave={() => {
+							if (currentToggledIdxRef.current !== i) {
+								// not clicked
+								setCurrentIdx(null)
+							}
+						}}>{key}</button>
+					)
+				}
+			</div>
+			<div className="-mt-8">
+				{
+					TechStackGroupOrder.map((key, i) =>
+						<button key={i} className="flex flex-row gap-2 items-center mr-4 mt-8 float-left" onClick={() => {
+							currentToggledIdxRef.current = key[0]
+							setCurrentIdx(key[0])
+						}} onMouseEnter={() => {
+							setCurrentIdx(key[0])
+						}} onMouseLeave={() => {
+							console.log("Left", currentToggledIdxRef.current, key[0])
+							if (currentToggledIdxRef.current !== key[0]) {
+								// not clicked
+								setCurrentIdx(currentToggledIdxRef.current)
+							}
+						}}>
+							<img src={TechStackData[TechStackGroup[key[0]]][key[1]][0].src} className="transition-colors h-16 md:h-8 lg:h-12" style={{
+								"transitionProperty": "filter",
+								"filter": `saturate(${currentIdx === key[0] ? 1 : 0})`
+							}} />
+							<p style={{
+								"fontWeight": currentIdx === key[0] ? "700" : "400"
+							}}>{key[1]}</p>
+						</button>
+					)
+				}
 			</div>
 		</div>
 	)
@@ -69,42 +124,17 @@ function MiddleColumn() {
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">About me</h2>
-					<p className="pb-2">I am a <span className="font-bold">full stack web developer</span> currently pursuing a diploma in data analytics. I wish to combine both data analytics and web design to create something functional and meaningful.</p>
-					<p>Based in Singapore, I have been developing and tinkering since 2018.</p>
+					<p className="pb-2">I am a <span className="font-bold">full stack web developer</span> currently pursuing a diploma in data analytics.</p>
+					<p className="inline-flex items-center gap-2">
+						<MapPin size={24} weight="bold" />
+						Singapore, since 2018
+					</p>
 				</div>
 			</section>
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">What I am fluent in</h2>
-					<p className="pb-2">Since young, I had a strong passion for developing things. It started off with game development on the Roblox engine, before diving into Python to automate processes with scripts.</p>
-					<p>Now, I enjoy building <span className="font-bold">full stack web applications</span> more than ever with exciting technologies, such as Next.js, React and Typescript!</p>
-				</div>
-				<div className="inline-block w-full h-[132px] overflow-x-clip border-black border-solid border-b-2 border-t-2">
-					<div id="set" className="relative inline-block whitespace-nowrap scroll-lr h-full">
-						{
-							SKILLS_DATA.map((skillItem, i) => {
-								return (
-									<div key={i} className="inline-block w-32 box-content border-black border-solid border-r-2 last:border-r-0">
-										<img className={``} src={skillItem.image.src} alt={skillItem.title} />
-									</div>
-								)
-							})
-						}
-						<div className="absolute top-0 left-full inline-block whitespace-nowrap">
-							{
-								SKILLS_DATA.map((skillItem, i) => {
-									return (
-										<div key={i} className="inline-block w-32 box-content border-black border-solid border-r-2 last:border-r-0">
-											<img className={``} src={skillItem.image.src} alt={skillItem.title} />
-										</div>
-									)
-								})
-							}
-						</div>
-					</div>
-				</div>
-				<div className="p-4">
-					<p>As I find more time for my own hobbies, I would love to continue building impactful web applications from innovative ideas.</p>
+					<TechStack />
 				</div>
 			</section>
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
