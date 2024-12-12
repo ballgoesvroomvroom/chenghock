@@ -46,7 +46,7 @@ function TechStack() {
 						}} onMouseLeave={() => {
 							if (currentToggledIdxRef.current !== i) {
 								// not clicked
-								setCurrentIdx(null)
+								setCurrentIdx(currentToggledIdxRef.current)
 							}
 						}}>{key}</button>
 					)
