@@ -22,8 +22,8 @@ function ProjectDetailBanner({ projectId }: { projectId: string }) {
 				Back
 			</a>
 			<div className="flex items-center gap-3">
-				<img className={`w-full w-12 md:w-16 aspect-square min-w-0 ${ProjectData[projectId].logo.border ? "border border-black" : ""}`} src={ProjectData[projectId].logo.src} />
-				<div className="flex flex-col">
+				<img className={`w-12 md:w-16 aspect-square min-w-0 ${ProjectData[projectId].logo.border ? "border border-black" : ""}`} src={ProjectData[projectId].logo.src} />
+				<div className="flex flex-col grow">
 					<h1 className="font-bold text-4xl">{ProjectData[projectId].title}</h1>
 					<p>{ProjectData[projectId].synopsis}</p>
 				</div>
@@ -93,14 +93,14 @@ function ProjectShowcaseSlideshow({ projectId }: { projectId: string }) {
 	return (
 		<div className="relative">
 			<div
-				className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"
+				className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar max-h-96"
 				onScroll={scroll}
 				ref={carouselRef}
 			>
-				<img className="snap-start" src={ProjectData[projectId].coverImg.src} />
+				<img className="snap-start object-cover" src={ProjectData[projectId].coverImg.src} />
 				{
 					ProjectData[projectId].supplImg && ProjectData[projectId].supplImg.map((img, i) => 
-						<img key={i} className="snap-start" src={img.src} />
+						<img key={i} className="snap-start object-cover" src={img.src} />
 					)
 				}
 			</div>
