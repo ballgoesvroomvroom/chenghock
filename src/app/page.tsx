@@ -71,8 +71,8 @@ function TechStack() {
 								"transitionProperty": "filter",
 								"filter": `saturate(${currentIdx === key[0] ? 1 : 0})`
 							}} />
-							<p style={{
-								"fontWeight": currentIdx === key[0] ? "700" : "400"
+							<p className="transition-colors" style={{
+								"color": currentIdx === key[0] ? "#000" : "#0000001a"
 							}}>{key[1]}</p>
 						</button>
 					)
