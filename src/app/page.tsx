@@ -7,7 +7,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { ProjectData, ProjectDataOrder } from "@/app/data/projects";
 import { TechStack as TechStackData, Group as TechStackGroup, GroupColor as TechStackGroupColor, TotalOrder as TechStackGroupOrder } from "@/app/data/techstack";
 
-import { MapPin } from "@phosphor-icons/react"
+import { ArrowSquareOut, MapPin } from "@phosphor-icons/react"
 import headshot from "@/public/graphics/headshot_square.jpg"
 
 function LeftColumn() {
@@ -139,6 +139,13 @@ function MiddleColumn() {
 			</section>
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
+					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">ML works</h2>
+					<p className="pb-2">I like to go beyond and learn about ML applications, building them from ground up.</p>
+					<p className="">Visit <a href="https://ml.chenghock.com" className="link inline-flex" target="_blank">ml.chenghock.com <ArrowSquareOut size={12} /></a></p>
+				</div>
+			</section>
+			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
+				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">From CRUD apps, to Data visualisations, to AI</h2>
 					<p className="pb-2">Starting with Python-based CRUD CLI programs, I learned the fundamentals of app development before moving on to building <span className="font-bold">CRUD web apps using vanilla JavaScript and various frameworks</span>.</p>
 					<p className="pb-2">My interest in AI grew, leading me to explore its <span className="font-bold">applications in data analytics</span>, which shaped my choice of diploma.</p>
@@ -165,7 +172,7 @@ function MiddleColumn() {
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">Reach out to me</h2>
-					<p className="pb-2">I am easily reachable via email, <a href="mailto:hi@chenghock.com" className="link"	 target="_blank">hi@chenghock.com</a>.</p>
+					<p className="pb-2">I am easily reachable via email, <a href="mailto:hi@chenghock.com" className="link"	target="_blank">hi@chenghock.com</a>.</p>
 					<p className="pb-2">Alternatively, you may reach out to me on any of my social media platforms.</p>
 					<SocialsContainer iconSize={32} />
 				</div>
