@@ -3,8 +3,10 @@
 import { TopbarContext } from "@/app/components/topbar/topbar";
 import { ProjectData } from "@/app/data/projects"
 
-import { useContext, useEffect, useRef, Fragment, useState, MouseEventHandler, WheelEventHandler } from "react";
+import { useContext, useEffect, useRef, Fragment, useState, MouseEventHandler, WheelEventHandler, SetStateAction, Dispatch } from "react";
 import { notFound } from "next/navigation";
+import { ArrowsIn, ArrowsOut } from "@phosphor-icons/react";
+import { StaticImageData } from "next/image";
 
 function ProjectDetailBanner({ projectId }: { projectId: string }) {
 	return (
@@ -32,10 +34,46 @@ function ProjectDetailBanner({ projectId }: { projectId: string }) {
 	)
 }
 
+function ProjectImageModal({ currentImage, isOpen, setIsOpen }: { currentImage?: StaticImageData, isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }) {
+	const dialogRef = useRef<HTMLDialogElement>(null)
+
+	useEffect(() => {
+		if (!dialogRef.current) {
+			return
+		}
+
+		if (isOpen) {
+			dialogRef.current.showModal()
+		} else {
+			dialogRef.current.close()
+		}
+	}, [isOpen])
+
+	return (
+		<dialog ref={dialogRef} className="w-svw h-svh m-0 backdrop:opacity-25 hacus:outline-none backdrop-blur-sm overflow-hidden" role="dialog" aria-modal="true" style={{
+			maxWidth: "calc(100svw - 14px)",
+			maxHeight: "100svh",
+			backgroundColor: "#ffffffed"
+		}}>
+			<div className="fixed flex flex-col gap-2 justify-center items-center z-10 w-full h-full min-w-0">
+				{ currentImage != null && <img className="w-full border-y-2 border-black border-solid object-contain" src={currentImage.src} /> }
+				<button className="group self-end mr-2 inline-flex flex-row items-center gap-1 p-1 px-2 bg-black rounded-md text-white h-min opacity-75 hacus:opacity-100 transition-opacity" onClick={() => {
+					setIsOpen(false)
+				}}>
+					<span>Minimise</span>
+					<ArrowsIn size={20} className="origin-center scale-90 transition-transform group-hover:scale-100 group-focus:scale-100" />
+				</button>
+			</div>
+		</dialog>
+	)
+}
+
 function ProjectShowcaseSlideshow({ projectId }: { projectId: string }) {
 	const carouselRef = useRef<HTMLDivElement>(null)
 	const [carouselIdx, setCarouselIdx] = useState(0)
 	const carouselNextRef = useRef(carouselIdx +1)
+
+	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	let ignoreScroll = useRef(false)
 	let lastInteracted = useRef(0)
@@ -74,8 +112,9 @@ function ProjectShowcaseSlideshow({ projectId }: { projectId: string }) {
 			}
 
 			let intervalId = setInterval(() => {
-				if (!carouselRef.current || !ProjectData[projectId].supplImg || +new Date() -lastInteracted.current <= 2000) {
+				if (!carouselRef.current || !ProjectData[projectId].supplImg || +new Date() -lastInteracted.current <= 2000 || isModalOpen) {
 					// give 2s of no user interactivity before auto scrolling
+					// OR, dont scroll when modal is open
 					return
 				}
 
@@ -87,42 +126,53 @@ function ProjectShowcaseSlideshow({ projectId }: { projectId: string }) {
 			return () => {
 				clearInterval(intervalId)
 			}
-		}, [carouselRef])
+		}, [carouselRef, isModalOpen])
 	}
 
 	return (
-		<div className="relative">
-			<div
-				className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar max-h-96"
-				onScroll={scroll}
-				ref={carouselRef}
-			>
-				<img className="snap-start object-cover" src={ProjectData[projectId].coverImg.src} />
+		<>
+			<ProjectImageModal currentImage={carouselIdx === 0 ? ProjectData[projectId].coverImg : (ProjectData[projectId].supplImg ? ProjectData[projectId].supplImg[carouselIdx -1] : undefined )} isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+			<div className="relative">
+				<div
+					className="relative flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar max-h-96"
+					onScroll={scroll}
+					ref={carouselRef}
+				>
+					<img className="snap-start object-cover" src={ProjectData[projectId].coverImg.src} />
+					{
+						ProjectData[projectId].supplImg && ProjectData[projectId].supplImg.map((img, i) => 
+							<img key={i} className="snap-start object-cover" src={img.src} />
+						)
+					}
+					<div className="flex flex-col justify-end sticky right-2 z-10">
+						<button className="group inline-flex flex-row items-center gap-1 p-1 px-2 bg-black rounded-t-md text-white h-min opacity-75 hacus:opacity-100 transition-opacity" onClick={() => {
+							setIsModalOpen(true)
+						}}>
+							<span>Expand</span>
+							<ArrowsOut size={20} className="origin-center scale-90 transition-transform group-hover:scale-100 group-focus:scale-100" />
+						</button>
+					</div>
+				</div>
 				{
-					ProjectData[projectId].supplImg && ProjectData[projectId].supplImg.map((img, i) => 
-						<img key={i} className="snap-start object-cover" src={img.src} />
+					ProjectData[projectId].supplImg && (
+						<div className="absolute bottom-0 left-0 w-full h p-4 flex justify-center items-end">
+							<div className="relative flex gap-2">
+								{
+									[...Array(ProjectData[projectId].supplImg.length +1)].map((_, i) => 
+										<div key={i} className="w-2 h-2 rounded-full bg-[rgba(150,150,150,.4)]"></div>
+									)
+								}
+								<div className="absolute top-0 left-0 w-2 h-2 rounded-full transition-transform" style={{
+									backgroundColor: ProjectData[projectId].accentColor,
+									transform: `translateX(${carouselIdx *16}px)`,
+								}}>
+								</div>
+							</div>
+						</div>
 					)
 				}
 			</div>
-			{
-				ProjectData[projectId].supplImg && (
-					<div className="absolute bottom-0 left-0 w-full h p-4 flex justify-center items-end">
-						<div className="relative flex gap-2">
-							{
-								[...Array(ProjectData[projectId].supplImg.length +1)].map((_, i) => 
-									<div key={i} className="w-2 h-2 rounded-full bg-[rgba(150,150,150,.4)]"></div>
-								)
-							}
-							<div className="absolute top-0 left-0 w-2 h-2 rounded-full transition-transform" style={{
-								backgroundColor: ProjectData[projectId].accentColor,
-								transform: `translateX(${carouselIdx *16}px)`,
-							}}>
-							</div>
-						</div>
-					</div>
-				)
-			}
-		</div>
+		</>
 	)
 }
 
@@ -149,7 +199,7 @@ function ProjectDetailContent({ projectId }: { projectId: string }) {
 	}, [])
 
 	return (
-		<div className="flex flex-col-reverse md:flex-row p-4 gap-12 md:max-h-[750px] overflow-auto border-solid border-black border-t-2">
+		<div className="w-full flex flex-col-reverse md:flex-row p-4 gap-12 md:max-h-[750px] overflow-auto border-solid border-black border-t-2">
 			<div id="content-left-window" className="flex flex-col mr-8">
 				<nav className="flex flex-col whitespace-nowrap pb-14">
 					{
@@ -215,7 +265,7 @@ export default function DetailedProjectPage({ params }: { params: { projectId: s
 
 	// populate page
 	return (
-		<main className="w-full flex flex-col items-center">
+		<main className="w-full flex flex-col items-center grow">
 			<ProjectDetailBanner projectId={projectId} />
 			<ProjectShowcaseSlideshow projectId={projectId} />
 			<ProjectDetailContent projectId={projectId} />

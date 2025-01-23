@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-primary">
-      <body className={`${robotoCondensed.className}`}>
+      <body className={`${robotoCondensed.className} flex flex-col`}>
         <TopbarContextProviderWrapper>
           {children}
         </TopbarContextProviderWrapper>

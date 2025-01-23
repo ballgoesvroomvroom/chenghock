@@ -6,6 +6,9 @@ import qriller_thumb from "@/public/works/asset_01.png"
 import bbai_logo from "@/public/works/bbai_logo.png"
 import bbai_thumb from "@/public/works/bbai_thumb.png"
 
+import sr_logo from "@/public/works/sr_logo.png"
+import sr_thumb from "@/public/works/sr_thumb.png"
+
 import gp_logo from "@/public/works/asset_04.png"
 import gp_thumb from "@/public/works/asset_03.png"
 import gp_suppl_1 from "@/public/works/asset_05.png"
@@ -78,6 +81,23 @@ export const ProjectData: ProjectDataType = {
 		],
 		"accentColor": "#fff"
 	},
+	"scalereach": {
+		"title": "ScaleReach",
+		"created_on": "December 2024",
+		"type": 0,
+		"status": "Production",
+		"ext_link_demo": "https://github.com/ScaleReach",
+		"logo": {
+			border: true,
+			src: sr_logo.src
+		},
+		"coverImg": sr_thumb,
+		"synopsis": "An innovative solution to reducing call volumes at OCBC's hotline, powered by ASR and LLM models.",
+		"description": [
+			["To be documented", "Meanwhile, check out the site."]
+		],
+		"accentColor": "#ff0000"
+	},
 	// "spots": {
 	// 	"title": "Spots",
 	// 	"created_on": "September 2024",
@@ -114,6 +134,6 @@ export const ProjectData: ProjectDataType = {
 }
 
 export const ProjectDataOrder: Array<Array<string>> = [
-	["qriller", "brainbloomai"],
+	["qriller", "brainbloomai", "scalereach"],
 	["study"]
 ]
