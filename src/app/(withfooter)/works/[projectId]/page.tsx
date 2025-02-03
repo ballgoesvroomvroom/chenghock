@@ -50,8 +50,7 @@ function ProjectImageModal({ currentImage, isOpen, setIsOpen }: { currentImage?:
 	}, [isOpen])
 
 	return (
-		<dialog ref={dialogRef} className="w-svw h-svh m-0 backdrop:opacity-25 hacus:outline-none backdrop-blur-sm overflow-hidden" role="dialog" aria-modal="true" style={{
-			maxWidth: "calc(100svw - 14px)",
+		<dialog ref={dialogRef} className="w-full max-w-svw h-svh m-0 backdrop:opacity-25 hacus:outline-none backdrop-blur-sm overflow-hidden" role="dialog" aria-modal="true" style={{
 			maxHeight: "100svh",
 			backgroundColor: "#ffffffed"
 		}}>
