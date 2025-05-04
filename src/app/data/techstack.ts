@@ -8,6 +8,8 @@ import hadoop_logo from "@/public/ext_logos/hadoop.png"
 import docker_logo from "@/public/ext_logos/docker.png"
 import powerbi_logo from "@/public/ext_logos/powerbi.png"
 import sklearn_logo from "@/public/ext_logos/sklearn.png"
+import pytorch_logo from "@/public/ext_logos/pytorch.png"
+import tensorflow_logo from "@/public/ext_logos/tensorflow.svg"
 
 
 export const TechStack: {[group: string]: { [skill: string]: [StaticImageData] }} = {
@@ -15,6 +17,8 @@ export const TechStack: {[group: string]: { [skill: string]: [StaticImageData] }
 		"Hadoop": [hadoop_logo],
 		"PowerBI": [powerbi_logo],
 		"Sci-kit learn": [sklearn_logo],
+		"PyTorch": [pytorch_logo],
+		"TensorFlow": [tensorflow_logo]
 	},
 	"Web development": {
 		"PostgreSQL": [psql_logo],
@@ -27,4 +31,4 @@ export const TechStack: {[group: string]: { [skill: string]: [StaticImageData] }
 
 export const Group: string[] = ["Data science", "Web development"]
 export const GroupColor: string[] = ["#fcba03", "#377ef0"]
-export const TotalOrder: [number, string][] = [[1, "PostgreSQL"], [0, "Hadoop"], [1, "React"], [0, "PowerBI"], [1, "Typescript"], [1, "Figma"], [1, "Docker"], [0, "Sci-kit learn"]]
+export const TotalOrder: [number, string][] = [[1, "PostgreSQL"], [0, "Hadoop"], [1, "React"], [0, "PowerBI"], [1, "Typescript"], [0, "PyTorch"], [1, "Figma"], [0, "TensorFlow"], [1, "Docker"], [0, "Sci-kit learn"]]
