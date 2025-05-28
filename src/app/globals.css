@@ -83,6 +83,12 @@ body {
   }
 }
 
+@layer base {
+  ul {
+    @apply list-disc pl-4;
+  }
+}
+
 @layer components {
   a.link {
     @apply hover:underline text-[#ff3084];

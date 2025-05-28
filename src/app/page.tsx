@@ -146,6 +146,28 @@ function MiddleColumn() {
 			</section>
 			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
 				<div className="p-4">
+					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">My achievements</h2>
+					<ul>
+						<li>3rd place, Dell InnovateFest 2024, represented NYP</li>
+						<li>Silver medal, National Olympiad in AI, Singapore</li>
+						<li>Finalist, Lee Hsien Loong Smart Nation Award, Singapore</li>
+						<li>Director List throughout, NYP</li>
+					</ul>
+				</div>
+			</section>
+			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
+				<div className="p-4">
+					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">Co-cirruculars</h2>
+					<p className="pb-2">In my free time, I love to develop my own projects. However, at the same time, I also love to bond with like-minded individuals through club activities</p>
+					<ul className="pb-2">
+						<li>Secretary, NYP AI, Nanyang Polytechnic, Singapore (2023 - 2025)</li>
+						<li>Vice President, Alpha Robotics Club, Peirce Secondary School, Singapore (2018 - 2022)</li>
+						<li>Vice President, Robotics Club, Da Qiao Primary School, Singapore (2015 - 2017)</li>
+					</ul>
+				</div>
+			</section>
+			<section className="overflow-x-auto border-b-2 border-black border-solid min-w-0">
+				<div className="p-4">
 					<h2 className="text-3xl font-bold underline decoration-dotted mb-4">From CRUD apps, to Data visualisations, to AI</h2>
 					<p className="pb-2">Starting with Python-based CRUD CLI programs, I learned the fundamentals of app development before moving on to building <span className="font-bold">CRUD web apps using vanilla JavaScript and various frameworks</span>.</p>
 					<p className="pb-2">My interest in AI grew, leading me to explore its <span className="font-bold">applications in data analytics</span>, which shaped my choice of diploma.</p>
